@@ -2,3 +2,10 @@
 
 ## Load Alternc variable
 . /etc/alternc/local.sh
+## Load debconf
+. /usr/share/debconf/confmodule
+
+db_get alternc-certbot/mail
+MAIL="$RET"
+
+certbot --agree-tos --email "$MAIL" --non-interactive --apache certonly -d "$FQDN"
