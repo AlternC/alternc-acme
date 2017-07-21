@@ -1,0 +1,5 @@
+Template: alternc-certbot/mail
+Type: string
+Default: 
+Description: Where do you want receive certbot notification ?
+ To remember certificat renew, certbot will send you a notification to each domain.

@@ -23,6 +23,8 @@ package:
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "alternc (>= 3.3), certbot" \
+		--depends "debconf, alternc (>= 3.3), certbot" \
+		--deb-config "debian/config" \
+		--deb-templates "debian/config.templates" \
 		--chdir src \
 		.
