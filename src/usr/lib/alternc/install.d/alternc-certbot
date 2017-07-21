@@ -9,3 +9,6 @@ db_get alternc-certbot/mail
 MAIL="$RET"
 
 certbot --agree-tos --email "$MAIL" --non-interactive --apache certonly -d "$FQDN"
+
+cat "/etc/letsencrypt/live/$FQDN/privkey.pem" > /etc/alternc/apache.pem
+cat "/etc/letsencrypt/live/$FQDN/fullchain.pem" >> /etc/alternc/apache.pem
