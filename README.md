@@ -16,7 +16,7 @@ You need :
 
 # Installation
 
-You can download last package from [release page](../../releases)
+You can download last package from [release page](../../releases/latest)
 
 ```shell
 cd ~
@@ -42,6 +42,6 @@ make
 
 # ROADMAP
 
-* [ ] Auto renew panel certificat
+* [x] Auto renew panel certificat (0.0.2)
 * [ ] Auto detect new domain add from panel
 * [ ] Auto renew all domains 
