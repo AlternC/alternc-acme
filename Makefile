@@ -3,7 +3,10 @@ VERSION=$(shell git tag -l --points-at HEAD)
 ITERATION=""
 
 ifeq ($(strip $(VERSION)),)
-	VERSION="0.0.0"
+	VERSION=$(shell git describe --tags --abbrev=0)
+	ifeq ($(strip $(VERSION)),)
+		VERSION="0.0.0"
+	endif
 	ITERATION=`date +'%y%m%d%H%M%S'`
 endif
 
