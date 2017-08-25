@@ -16,6 +16,8 @@ You need :
 
 # Installation
 
+## Stable version
+
 You can download last package from [release page](../../releases/latest)
 
 ```shell
@@ -23,6 +25,17 @@ cd ~
 wget https://github.com/AlternC/alternc-certbot/releases/download/0.0.2/alternc-certbot_0.0.2-_all.deb
 dpkg -i alternc-certbot_0.0.2-_all.deb
 apt-get -f install
+```
+
+## Nightly version
+
+You can get last package from bintray, it's follow master branch
+
+```shell
+echo "deb [trusted=yes] https://dl.bintray.com/alternc/nightly stable main"  >> /etc/apt/sources.list.d/alternc.list
+apt-get update
+apt-get upgrade
+apt-get install alternc-certbot
 ```
 
 # Packaging from source
