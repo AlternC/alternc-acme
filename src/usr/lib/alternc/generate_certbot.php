@@ -22,9 +22,16 @@ foreach ($accounts as $cuid => $infos) {
                 // Get all hosts (subdomain) 
                 $sub_domains=$domain_data['sub'];
                 foreach($sub_domains as $sub_domain) {
-                        print_r ($sub_domain['fqdn']);
                         $output = "";
-                        exec("certbot --agree-tos --non-interactive --apache certonly -d ".$sub_domain['fqdn'],$output);
+                        $return_var = -1;
+                        exec("certbot --agree-tos --non-interactive --apache certonly -d ".$sub_domain['fqdn'],$output,$return_var);
+                        //Add certificate to panel
+                        if ($return_var == 0) {
+                                $key = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/privkey.pem');
+                                $crt = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/cert.pem');
+                                $chain = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/chain.pem');
+                                $ssl->import_cert($key,$crt,$chain);
+                        }
                 }
                 $dom->unlock();
         }
