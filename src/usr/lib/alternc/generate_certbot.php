@@ -14,6 +14,17 @@ $accounts = $admin->get_list(1,0,FALSE,'domaine');
 foreach ($accounts as $cuid => $infos) {
         $mem->su($cuid);
 
+        //Get SSL set to each accounts
+        $ssl_list = $ssl->get_list();
+
+        $ssl_vhosts = array();
+        foreach ($ssl_list as $ssl_item) {
+                $ssl_vhosts[$ssl_item['fqdn']] = array(
+                        'certid' => $ssl_item['id'],
+                        'sslkey' => $ssl_item['sslkey']
+                ) ;
+        }
+
         //Get all domain set to each user
         $domains = $dom->enum_domains();
         foreach ($domains as $domain) {
@@ -30,7 +41,14 @@ foreach ($accounts as $cuid => $infos) {
                                 $key = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/privkey.pem');
                                 $crt = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/cert.pem');
                                 $chain = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/chain.pem');
-                                $ssl->import_cert($key,$crt,$chain);
+
+                                if (isset($ssl_vhosts[$sub_domain['fqdn']])) {
+                                        if ($ssl_vhosts[$sub_domain['fqdn']]['sslkey'] == $key) {
+                                                $ssl->finalize($ssl_vhosts[$sub_domain['fqdn']]['certid'],$crt,$chain);
+                                        }
+                                } else {
+                                        $ssl->import_cert($key,$crt,$chain);
+                                }
                         }
                 }
                 $dom->unlock();
