@@ -35,7 +35,7 @@ foreach ($accounts as $cuid => $infos) {
                 foreach($sub_domains as $sub_domain) {
                         $output = "";
                         $return_var = -1;
-                        exec("certbot --agree-tos --non-interactive --apache certonly -d ".$sub_domain['fqdn'],$output,$return_var);
+                        exec("certbot --agree-tos --non-interactive --apache certonly -d ".$sub_domain['fqdn']." 2>/dev/null",$output,$return_var);
                         //Add certificate to panel
                         if ($return_var == 0) {
                                 $key = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/privkey.pem');
