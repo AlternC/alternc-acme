@@ -1,0 +1,25 @@
+{
+	"package": {
+		"name": "alternc-certbot",
+		"repo": "stable",
+		"subject": "alternc",
+		"vcs_url": "https://github.com/AlternC/alternc-certbot.git",
+		"licenses": ["GPL-3.0"]
+	},
+	"version": {
+		"name": "stable"
+	},
+	"files": [
+		{
+			"includePattern": "./(.*\\.deb)",
+			"uploadPattern": "pool/main/a/alternc/$1",
+			"matrixParams": {
+				"override": 1,
+				"deb_distribution": "wheezy,jessie,stable",
+				"deb_component": "main",
+				"deb_architecture": "all"
+			}
+		}
+	],
+	"publish": true
+}
