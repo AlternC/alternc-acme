@@ -29,6 +29,7 @@ echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /
 apt-get update
 apt-get upgrade
 apt-get install alternc-certbot
+alternc.install
 ```
 
 ## Nightly version
@@ -40,6 +41,7 @@ echo "deb [trusted=yes] https://dl.bintray.com/alternc/nightly stable main"  >> 
 apt-get update
 apt-get upgrade
 apt-get install alternc-certbot
+alternc.install
 ```
 
 # Packaging from source
