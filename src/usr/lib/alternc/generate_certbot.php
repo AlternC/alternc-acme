@@ -42,11 +42,13 @@ foreach ($accounts as $cuid => $infos) {
                                 $crt = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/cert.pem');
                                 $chain = file_get_contents('/etc/letsencrypt/live/'.$sub_domain['fqdn'].'/chain.pem');
 
-                                if (isset($ssl_vhosts[$sub_domain['fqdn']])) {
-                                        if ($ssl_vhosts[$sub_domain['fqdn']]['sslkey'] == $key) {
-                                                $ssl->finalize($ssl_vhosts[$sub_domain['fqdn']]['certid'],$crt,$chain);
-                                        }
-                                } else {
+                                if (
+                                        !isset($ssl_vhosts[$sub_domain['fqdn']]) ||
+                                        (
+                                                isset($ssl_vhosts[$sub_domain['fqdn']]) &&
+                                                $ssl_vhosts[$sub_domain['fqdn']]['sslkey'] != $key
+                                        )
+                                ) {
                                         $ssl->import_cert($key,$crt,$chain);
                                 }
                         }
