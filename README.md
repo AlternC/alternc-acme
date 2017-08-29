@@ -12,6 +12,7 @@ You need :
 * certbot package
  * with wheezy : [from antonbatenev backport](https://software.opensuse.org//download.html?project=home%3Aantonbatenev%3Aletsencrypt&package=certbot)
  * with jessie : [from backport](https://packages.debian.org/jessie-backports/certbot)
+* [apt-transport-https](https://packages.debian.org/search?keywords=apt-transport-https) package if you use bintray service
 
 
 # Installation
