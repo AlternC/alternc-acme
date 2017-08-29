@@ -18,13 +18,16 @@ You need :
 
 ## Stable version
 
-You can download last package from [release page](../../releases/latest)
+You can download last package from :
+* github : [release page](../../releases/latest) 
+* bintray : [ ![Bintray](https://api.bintray.com/packages/alternc/stable/alternc-certbot/images/download.svg) ](https://bintray.com/alternc/stable/alternc-certbot/_latestVersion)
+* from bintray repository
 
 ```shell
-cd ~
-wget https://github.com/AlternC/alternc-certbot/releases/download/0.0.2/alternc-certbot_0.0.2-_all.deb
-dpkg -i alternc-certbot_0.0.2-_all.deb
-apt-get -f install
+echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
+apt-get update
+apt-get upgrade
+apt-get install alternc-certbot
 ```
 
 ## Nightly version
@@ -56,5 +59,5 @@ make
 # ROADMAP
 
 * [x] Auto renew panel certificat (0.0.2)
-* [ ] Auto detect new domain add from panel
+* [x] Auto detect new domain add from panel (0.0.3)
 * [ ] Auto renew all domains 
