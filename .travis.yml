@@ -6,9 +6,17 @@ before_install:
 install: 
     - make
 deploy:
-    skip_cleanup: true
-    provider: bintray
-    file: .bintray.json
-    user: camlafit
-    key:
-        secure: GLk/hTt0zBuukw3k9399UY1Q3zFa0SsYTImc/eyDE6hgZZRgOx7gIGSt/OE5DKqWydaaVWrgA+7iji2tBkSAJ+AU+tf3ZaGaNUhUXjWQealBLn57m3ieTxzztPEYWL/VHU5UYEMs4RD82IPo5RdIgoKLV8cY+U+jsE06ecjjg7xVicaRB09Advpb2sy2iQ+x1PO9OOCkvejztkjFZfAvXvjphhsCsz4yYq1ipgJrBPjkln2HWK499/Ei7/BfuHPHu1J9tn3y5ng8dUjEoRVDCiHeXTLm1xpU7fYLRd3YTjLr+HJ+ioayGdlgCC7btbiDInsnaJ+WazE7MpenOAh9bmTt3A3Znd4ZJvpD8tYTFbwTTdnXpAtsD8T6n7LVCeBySvQoI6DljV53Lpn/M+Ip/onlhn4vY81e+gYNEV9fdpXoHfaIdRnn1Kau3P+OaubSXkoTXqlHxGh+lFvT310/QUzIkxoUEa7VFwGyxoscjUUTZhAzkg6OMsEsgT7GsXyih+w1lYy/al7Gosmf9s6mZaTH9Vbwqnf7OQY/LNSX7JAazYx/vip0ltzabWrUHdzP5Cl1uQNbVQ+3OuyKe8RFhFUF09vh9e3e3gDudVqyaeYziXmXsg1xh4LHQbzAbLhD2C2YqojOWBJJnGlF4tTX+u28oF+WpL9gEMttyfU5l60=
+    - provider: bintray
+      skip_cleanup: true
+      file: .bintray.json
+      user: camlafit
+      key:
+          secure: GLk/hTt0zBuukw3k9399UY1Q3zFa0SsYTImc/eyDE6hgZZRgOx7gIGSt/OE5DKqWydaaVWrgA+7iji2tBkSAJ+AU+tf3ZaGaNUhUXjWQealBLn57m3ieTxzztPEYWL/VHU5UYEMs4RD82IPo5RdIgoKLV8cY+U+jsE06ecjjg7xVicaRB09Advpb2sy2iQ+x1PO9OOCkvejztkjFZfAvXvjphhsCsz4yYq1ipgJrBPjkln2HWK499/Ei7/BfuHPHu1J9tn3y5ng8dUjEoRVDCiHeXTLm1xpU7fYLRd3YTjLr+HJ+ioayGdlgCC7btbiDInsnaJ+WazE7MpenOAh9bmTt3A3Znd4ZJvpD8tYTFbwTTdnXpAtsD8T6n7LVCeBySvQoI6DljV53Lpn/M+Ip/onlhn4vY81e+gYNEV9fdpXoHfaIdRnn1Kau3P+OaubSXkoTXqlHxGh+lFvT310/QUzIkxoUEa7VFwGyxoscjUUTZhAzkg6OMsEsgT7GsXyih+w1lYy/al7Gosmf9s6mZaTH9Vbwqnf7OQY/LNSX7JAazYx/vip0ltzabWrUHdzP5Cl1uQNbVQ+3OuyKe8RFhFUF09vh9e3e3gDudVqyaeYziXmXsg1xh4LHQbzAbLhD2C2YqojOWBJJnGlF4tTX+u28oF+WpL9gEMttyfU5l60=
+    - provider: releases
+      skip_cleanup: true
+      file_glob: true
+      file: "./*.deb"
+      api_key:
+          secure: "kIDGS4LaqEvLgcA2VwUu/dViTPi4k4DWbpKt2+oLNFROFYLScF2v0hh+W1TZRJcgZUQSbQcZfkj6Wcqq1zbSewnlRG2r1JhAs4fq/StBfb14p1kw/BRv8OTYl7I38PEaMqZ0P3UvjSby0n1hIXgpTD6Hq2n8IQXqo9x3FY8WWOjTFXppar21cQG/jdXsOSiNn0xRMlJ6GvR8Qeq9G66c/YYFrrnpDN0IV4LpyrgurV4nMEybFWw5Z/43xBrDdq3RoR+mI+2d4u/+ac2XDTNAIaji5RcdrWkOzgfkWvg8uZbCfjoMdTKSnFVu2oywONgdpETP5eRopHELBqUgx875I3KQ9PKR8c5canA9Tv548HoTY43x+fRa5Zm19k0SQ9h6kL+Es1wxAgrE0NpNoYv4o509DOqRDysUQ8OoRlwwRo8zMj/hpCH1OjEB+UQV6H7u+nmkzU9UNQfPPgjAAw2Lu7kUCwHwyylfxroE2aOtfEP4EnnKkYCQveHzqzTLHjopOZRKNc9glOCnbZh7wVBfiONQCJxiP7i2gSYmVoIB61xaJDXnNwE74a14Wg2DiQt5kqB9RKGa/uGJn1RSzxgxr5ddtbvahe3rp4J0cfvQlESKrcxv21BbfquDqOwCPO6mKDlOCmmR0u4+8EXilZXqPSE8gSFM/xYhv6XbVUKGqBk="
+      on:
+          tags: true
