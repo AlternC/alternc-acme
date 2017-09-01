@@ -10,12 +10,15 @@ ifeq ($(strip $(VERSION)),)
 	ITERATION=`date +'%y%m%d%H%M%S'`
 endif
 
-.PHONY: clean package
+.PHONY: clean translate package
 
-all: clean package
+all: clean translate package
 
 clean:
 	rm -f $(NAME)_*.deb
+
+translate:
+	po2debconf -o debian/templates debian/templates
 
 package:
 	fpm -s dir -t deb \
@@ -28,6 +31,6 @@ package:
 		--architecture all \
 		--depends "debconf, alternc (>= 3.2), alternc-ssl, certbot, certbot ( <= 8 ) | python-certbot-apache" \
 		--deb-config "debian/config" \
-		--deb-templates "debian/config.templates" \
+		--deb-templates "debian/templates" \
 		--chdir src \
 		.
