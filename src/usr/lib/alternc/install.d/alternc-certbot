@@ -5,11 +5,13 @@
 ## Load debconf
 . /usr/share/debconf/confmodule
 
-db_get alternc-certbot/mail
-MAIL="$RET"
+if [ $1 == "apache2" ]; then
+    db_get alternc-certbot/mail
+    MAIL="$RET"
 
-if certbot --agree-tos --email "$MAIL" --non-interactive --apache certonly -d "$FQDN"
-then
-    cat "/etc/letsencrypt/live/$FQDN/privkey.pem" > /etc/alternc/apache.pem
-    cat "/etc/letsencrypt/live/$FQDN/fullchain.pem" >> /etc/alternc/apache.pem
+    if certbot --agree-tos --email "$MAIL" --non-interactive --apache certonly -d "$FQDN"
+    then
+        cat "/etc/letsencrypt/live/$FQDN/privkey.pem" > /etc/alternc/apache.pem
+        cat "/etc/letsencrypt/live/$FQDN/fullchain.pem" >> /etc/alternc/apache.pem
+    fi
 fi
