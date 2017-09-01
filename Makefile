@@ -29,7 +29,7 @@ package:
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "debconf, alternc (>= 3.2), alternc-ssl, certbot, certbot ( <= 8 ) | python-certbot-apache" \
+		--depends "debconf, alternc (>= 3.2), alternc-ssl, certbot, certbot" \
 		--deb-config "debian/config" \
 		--deb-templates "debian/templates" \
 		--chdir src \
