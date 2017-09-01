@@ -26,7 +26,7 @@ package:
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "debconf, alternc (>= 3.2), certbot, certbot ( <= 8 ) | python-certbot-apache" \
+		--depends "debconf, alternc (>= 3.2), alternc-ssl, certbot, certbot ( <= 8 ) | python-certbot-apache" \
 		--deb-config "debian/config" \
 		--deb-templates "debian/config.templates" \
 		--chdir src \
