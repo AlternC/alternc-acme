@@ -1,0 +1,22 @@
+#!/usr/bin/php
+<?php
+
+chdir("/usr/share/alternc/panel/");
+require("/usr/share/alternc/panel/class/config_nochk.php");
+
+// Super admin enabled
+$admin->enabled=1;
+
+if ($argv[1] == "dns_reload_zone" && !empty($argv[2])){
+    $err->log("certbot", "dns_reload_zone ".$domain);
+    $domain_name = $argv[2];
+
+    list($sud_domain,$cuid) = $dom->get_sub_domain_id_and_member_by_name($domain_name);
+    $mem->su($cuid);
+
+    $dom->lock();
+    $certbot->import($domain_name);    
+    $dom->unlock();
+    
+    $mem->unsu();
+}
