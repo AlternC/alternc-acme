@@ -45,7 +45,7 @@ apt-get install apt-transport-https
 echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
 apt-get update
-apt-get install -t jessie-backports certbot python-certbot-apache
+apt-get install -t jessie-backports certbot
 apt-get install alternc-certbot
 alternc.install
 ```
@@ -81,4 +81,5 @@ make
 
 * [x] Auto renew panel certificat (0.0.2)
 * [x] Auto detect new domain add from panel (0.0.3)
+* [x] Don't stop apache to get certificate (0.0.4)
 * [ ] Auto renew all domains
