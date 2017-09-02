@@ -26,7 +26,6 @@ You can download last package from :
 
 ### Wheezy
 
-
 ```shell
 apt-get install apt-transport-https
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
@@ -36,8 +35,6 @@ apt-get install certbot
 apt-get install alternc-certbot
 alternc.install
 ```
-
-
 ### Jessie
 
 ```shell
@@ -61,6 +58,18 @@ apt-get upgrade
 apt-get install alternc-certbot
 alternc.install
 ```
+
+# Configuration
+
+Once alternc-certbot installed , you must : 
+* run **alternc.install**
+* update alternc configuration to enable ssl quota and apply to all accounts :
+ * got to https://alternc_panel/adm_defquotas.php
+ * add value to ssl quota to each account type
+ * apply change
+ * and don't forget to synchronize
+
+You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certifica to all domain hosted.
 
 # Packaging from source
 
