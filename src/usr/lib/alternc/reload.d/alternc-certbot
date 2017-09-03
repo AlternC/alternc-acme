@@ -8,15 +8,16 @@ require("/usr/share/alternc/panel/class/config_nochk.php");
 $admin->enabled=1;
 
 if ($argv[1] == "dns_reload_zone" && !empty($argv[2])){
-    $err->log("certbot", "dns_reload_zone ".$domain);
     $domain_name = $argv[2];
+    $info = $dom->get_sub_domain_id_and_member_by_name($domain_name);
 
-    list($sud_domain,$cuid) = $dom->get_sub_domain_id_and_member_by_name($domain_name);
-    $mem->su($cuid);
+    $err->log("certbot", "dns_reload_zone ".$domain_name);
+
+    $mem->su($info['member_id']);
 
     $dom->lock();
-    $certbot->import($domain_name);    
+    $certbot->import($domain_name);
     $dom->unlock();
-    
+
     $mem->unsu();
 }
