@@ -32,5 +32,6 @@ package:
 		--depends "debconf, alternc (>= 3.2), alternc-ssl, certbot, certbot" \
 		--deb-config "debian/config" \
 		--deb-templates "debian/templates" \
+		--after-install "debian/postinst" \
 		--chdir src \
 		.
