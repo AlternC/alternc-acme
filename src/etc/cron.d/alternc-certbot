@@ -1,5 +1,4 @@
 # Every day at 2am, compute web, mail and db space usage per account.
 # You may put this computing every week only or on your filer on busy services.
 0 */12 * * *  root /usr/lib/alternc/install.d/alternc-certbot
-
-
+0 */12 * * *  root /usr/lib/alternc/generate_certbot.php

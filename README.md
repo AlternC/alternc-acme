@@ -91,4 +91,4 @@ make
 * [x] Auto renew panel certificat (0.0.2)
 * [x] Auto detect new domain add from panel (0.0.3)
 * [x] Don't stop apache to get certificate (0.0.4)
-* [ ] Auto renew all domains
+* [x] Auto renew all domains (0.0.5)
