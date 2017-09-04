@@ -33,5 +33,6 @@ package:
 		--deb-config "debian/config" \
 		--deb-templates "debian/templates" \
 		--after-install "debian/postinst" \
+		--after-remove  "debian/postrm" \
 		--chdir src \
 		.

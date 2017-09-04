@@ -1,0 +1,31 @@
+#! /bin/bash
+# postrm script
+#
+
+set -e
+
+case "$1" in
+	remove|purge)
+
+		if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+			#Jessie, Stretch
+			. /usr/share/apache2/apache2-maintscript-helper
+			apache2_invoke disconf alternc-certbot
+			rm -f /etc/apache2/conf-available/alternc-certbot.conf
+		else
+			#Wheezy
+			rm -f /etc/apache2/conf.d/alternc-certbot.conf
+			invoke-rc.d apache2 force-reload || true
+		fi
+
+	;;
+
+	upgrade|disappear|failed-upgrade|abort-install|abort-upgrade)
+
+	;;
+
+	*)
+		echo "postrm called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
