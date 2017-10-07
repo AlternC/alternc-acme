@@ -45,8 +45,8 @@ class m_certbot {
      * or false if an error occurred
      */
     function import($fqdn) {
-        global $cuid, $err, $ssl;
-        $err->log("certbot", "import");
+        global $cuid, $msg, $ssl;
+        $msg->log("certbot", "import");
 
         //Get SSL set to this account
         $ssl_list = $ssl->get_list();
