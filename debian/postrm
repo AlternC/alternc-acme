@@ -17,7 +17,17 @@ case "$1" in
 			rm -f /etc/apache2/conf.d/alternc-certbot.conf
 			invoke-rc.d apache2 force-reload || true
 		fi
+	# Run also specific purge action
+	;&
 
+	purge)
+
+		if [ -e /usr/share/debconf/confmodule ]; then
+		    # Source debconf library.
+		    . /usr/share/debconf/confmodule
+		    # Remove my changes to the db.
+		    db_purge
+		fi
 	;;
 
 	upgrade|disappear|failed-upgrade|abort-install|abort-upgrade)
