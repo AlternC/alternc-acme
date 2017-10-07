@@ -7,7 +7,7 @@ require("/usr/share/alternc/panel/class/config_nochk.php");
 // Super admin enabled
 $admin->enabled=1;
 
-if ($argv[1] == "dns_reload_zone" && !empty($argv[2])){
+if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $domain_name = $argv[2];
     $info = $dom->get_sub_domain_id_and_member_by_name($domain_name);
 

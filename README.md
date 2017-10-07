@@ -74,7 +74,7 @@ alternc.install
 
 # Configuration
 
-Once alternc-certbot installed , you must : 
+Once alternc-certbot installed , you must :
 * run **alternc.install**
 * update alternc configuration to enable ssl quota and apply to all accounts :
  * got to https://alternc_panel/adm_defquotas.php

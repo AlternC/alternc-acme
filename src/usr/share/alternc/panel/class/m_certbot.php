@@ -24,27 +24,29 @@
   ----------------------------------------------------------------------
  */
 
-// ----------------------------------------------------------------- 
+// -----------------------------------------------------------------
 /**
  * SSL Certificates management class
  */
-class m_certbot {
+class m_certbot
+{
 
-    // ----------------------------------------------------------------- 
+    // -----------------------------------------------------------------
     /**
      * Constructor
      */
-    function m_certbot() {
-        
+    public function m_certbot()
+    {
     }
 
-    // ----------------------------------------------------------------- 
+    // -----------------------------------------------------------------
     /** Import an existing ssl Key, Certificate and (maybe) a Chained Cert
-     * @param  string    $fqdn a full fqdn 
+     * @param  string    $fqdn a full fqdn
      * @return int|false the ID of the newly created certificate in the table
      * or false if an error occurred
      */
-    function import($fqdn) {
+    public function import($fqdn)
+    {
         global $cuid, $msg, $ssl;
         $msg->log("certbot", "import");
 
@@ -53,35 +55,34 @@ class m_certbot {
 
         $ssl_vhosts = array();
         foreach ($ssl_list as $ssl_item) {
-                $ssl_vhosts[$ssl_item['fqdn']] = array(
+            $ssl_vhosts[$ssl_item['fqdn']] = array(
                         'certid' => $ssl_item['id'],
                         'sslkey' => $ssl_item['sslkey']
                 ) ;
         }
 
         $output = "";
-        $return_var = -1;        
-        exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>/dev/null",$output,$return_var);
+        $return_var = -1;
+        exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>/dev/null", $output, $return_var);
 
         //Add certificate to panel
         if ($return_var == 0) {
-                $key = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/privkey.pem');
-                $crt = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/cert.pem');
-                $chain = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/chain.pem');
+            $key = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/privkey.pem');
+            $crt = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/cert.pem');
+            $chain = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/chain.pem');
 
-                if (
+            if (
                         !isset($ssl_vhosts[$fqdn]) ||
                         (
                                 isset($ssl_vhosts[$fqdn]) &&
                                 $ssl_vhosts[$fqdn]['sslkey'] != $key
                         )
                 ) {
-                        return $ssl->import_cert($key,$crt,$chain);
-                }
+                return $ssl->import_cert($key, $crt, $chain);
+            }
         }
         return false;
     }
-
 }
 
 /* Class m_certbot */

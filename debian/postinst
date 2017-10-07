@@ -9,7 +9,7 @@ case "$1" in
 
 		if [ -f /etc/apache2/conf.d/alternc-certbot.conf ]; then
 			rm /etc/apache2/conf.d/alternc-certbot.conf
-		fi 
+		fi
 
 		if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
 			#Jessie, Stretch
@@ -30,8 +30,8 @@ case "$1" in
 	    echo "*   update your ssl quota from admin panel   *"
 	    echo "*                                            *"
 	    echo "**********************************************"
-	    echo -e "\033[0m"		
-		
+	    echo -e "\033[0m"
+
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)

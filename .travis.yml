@@ -3,7 +3,7 @@ before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y ruby ruby-dev rubygems-integration build-essential po-debconf
     - gem install --no-ri --no-rdoc fpm
-install: 
+install:
     - make
 deploy:
     - provider: bintray
