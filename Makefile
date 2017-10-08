@@ -29,7 +29,7 @@ package:
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "apt-utils, debconf, alternc (>= 3.2.11), alternc-ssl, certbot, certbot" \
+		--depends "apt-utils, debconf, alternc (>> 3.2.10), alternc-ssl, certbot, certbot" \
 		--deb-config "debian/config" \
 		--deb-templates "debian/templates" \
 		--after-install "debian/postinst" \
