@@ -21,6 +21,9 @@ case "$1" in
 			ln -s /etc/alternc/alternc-certbot.conf /etc/apache2/conf.d/alternc-certbot.conf
 			invoke-rc.d apache2 force-reload > /dev/null 2>&1 || true
 		fi
+
+		chmod 744 /etc/cron.d/alternc-certbot
+
 		echo -e "\033[31m**********************************************"
 	    echo "*                                            *"
 	    echo "*   ALTERNC          ACTION REQUESTED        *"
