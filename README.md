@@ -72,17 +72,12 @@ apt-get install alternc-certbot
 alternc.install
 ```
 
-# Configuration
+# Configuration and Activation
 
 Once alternc-certbot installed , you must :
 * run **alternc.install**
-* update alternc configuration to enable ssl quota and apply to all accounts :
- * got to https://alternc_panel/adm_defquotas.php
- * add value to ssl quota to each account type
- * apply change
- * and don't forget to synchronize
 
-You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domain hosted.
+You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
 
 # Packaging from source
 
