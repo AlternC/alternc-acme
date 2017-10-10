@@ -21,4 +21,7 @@ if [ "$1" == "apache2" ]; then
     ##UPDATE SSL quota
     mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE defquotas SET value=1,quota='ssl' WHERE quota = 'ssl';"
     mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE quotas SET total=1,name='ssl' WHERE name = 'ssl';"
+
+    ##Generate let's encrypt certificate
+    /usr/lib/alternc/generate_certbot.php
 fi
