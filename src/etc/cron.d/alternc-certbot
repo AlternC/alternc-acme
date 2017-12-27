@@ -1,5 +1,5 @@
 # Twice a day, every 12 hours :
 # - renew the certificate of the panel (alternc-cerbot)
 # - generate or renew the certificates of every domain available (generate_certbot.php)
-0 */12 * * *  root /usr/lib/alternc/install.d/alternc-certbot
+0 */12 * * *  root /usr/lib/alternc/install.d/alternc-certbot apache2
 0 */12 * * *  root /usr/lib/alternc/generate_certbot.php
