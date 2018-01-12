@@ -101,3 +101,4 @@ make
 * [x] Don't stop apache to get certificate (0.0.4)
 * [x] Auto renew all domains (0.0.5)
 * [x] Provide a stretch compatibility (0.0.6)
+* [x] Correct update cron (0.0.11)
