@@ -102,3 +102,4 @@ make
 * [x] Auto renew all domains (0.0.5)
 * [x] Provide a stretch compatibility (0.0.6)
 * [x] Correct update cron (0.0.11)
+* [x] Prevent https redirection before certificate generation (0.0.12)
