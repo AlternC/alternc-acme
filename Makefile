@@ -24,7 +24,7 @@ package:
 	fpm -s dir -t deb \
 		-n $(NAME) \
 		-v $(VERSION) \
-		--iteration $(ITERATION) \
+		`if [ "$(ITERATION)" ]; then echo "--iteration $(ITERATION)"; fi` \
 		-m alternc@webelys.com \
 		--license GPLv3 \
 		--category admin \
