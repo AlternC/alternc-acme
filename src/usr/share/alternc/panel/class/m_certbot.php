@@ -56,9 +56,9 @@ class m_certbot
         $ssl_vhosts = array();
         foreach ($ssl_list as $ssl_item) {
             $ssl_vhosts[$ssl_item['fqdn']] = array(
-                        'certid' => $ssl_item['id'],
-                        'sslkey' => $ssl_item['sslkey']
-                ) ;
+                    'certid' => $ssl_item['id'],
+                    'sslkey' => $ssl_item['sslkey']
+                    ) ;
         }
 
         $output = "";
@@ -72,17 +72,35 @@ class m_certbot
             $chain = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/chain.pem');
 
             if (
-                        !isset($ssl_vhosts[$fqdn]) ||
-                        (
-                                isset($ssl_vhosts[$fqdn]) &&
-                                $ssl_vhosts[$fqdn]['sslkey'] != $key
-                        )
-                ) {
+                    !isset($ssl_vhosts[$fqdn]) ||
+                    (
+                     isset($ssl_vhosts[$fqdn]) &&
+                     $ssl_vhosts[$fqdn]['sslkey'] != $key
+                    )
+               ) {
                 return $ssl->import_cert($key, $crt, $chain);
             }
         }
         return false;
     }
+
+    /**
+    * Checks if dig returns our L_PUBLIC_IP
+    */
+    function isLocalAlterncDomain( $fqdn ){
+        global $L_PUBLIC_IP; 
+        $out=array();
+        exec("dig A +trace ".escapeshellarg($fqdn),$out);
+        $found=false;
+        foreach($out as $line) {
+            if (preg_match('#.*IN.A.*?([0-9\.]*)$#',$line,$mat) && $mat[1] == $L_PUBLIC_IP) {
+                $found = true;
+                break;
+            }
+        }
+        return $found;
+    }
+
 }
 
 /* Class m_certbot */
