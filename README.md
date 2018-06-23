@@ -38,7 +38,7 @@ echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/source
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
 apt-get update
 apt-get install -t jessie-backports certbot
-apt-get install alternc-certbot
+apt-get install alternc-certificate-provider-letsencrypt
 alternc.install
 ```
 
@@ -48,7 +48,7 @@ alternc.install
 apt-get install apt-transport-https
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
 apt-get update
-apt-get install certbot alternc-certbot
+apt-get install certbot alternc-certificate-provider-letsencrypt
 alternc.install
 ```
 
@@ -60,13 +60,13 @@ You can get last package from bintray, it's follow git master branch
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/nightly stable main"  >> /etc/apt/sources.list.d/alternc.list
 apt-get update
 apt-get upgrade
-apt-get install alternc-certbot
+apt-get install alternc-certificate-provider-letsencrypt
 alternc.install
 ```
 
 # Configuration and Activation
 
-Once alternc-certbot installed , you must :
+Once alternc-certificate-provider-letsencrypt installed , you must :
 * run **alternc.install**
 
 You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
