@@ -68,20 +68,20 @@ class m_certbot
     /**
     * Checks if dig returns our L_PUBLIC_IP
     */
-    function isLocalAlterncDomain( $fqdn ){
-        global $L_PUBLIC_IP; 
+    public function isLocalAlterncDomain($fqdn)
+    {
+        global $L_PUBLIC_IP;
         $out=array();
-        exec("dig A +trace ".escapeshellarg($fqdn),$out);
+        exec("dig A +trace ".escapeshellarg($fqdn), $out);
         $found=false;
-        foreach($out as $line) {
-            if (preg_match('#.*IN.A.*?([0-9\.]*)$#',$line,$mat) && $mat[1] == $L_PUBLIC_IP) {
+        foreach ($out as $line) {
+            if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $L_PUBLIC_IP) {
                 $found = true;
                 break;
             }
         }
         return $found;
     }
-
 }
 
 /* Class m_certbot */
