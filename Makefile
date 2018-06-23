@@ -10,9 +10,9 @@ ifeq ($(strip $(VERSION)),)
 	ITERATION=`date +'%y%m%d%H%M%S'`
 endif
 
-.PHONY: clean translate package
+.PHONY: clean package
 
-all: clean translate package
+all: clean package
 
 clean:
 	rm -f $(NAME)_*.deb
