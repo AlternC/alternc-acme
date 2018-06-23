@@ -103,3 +103,4 @@ make
 * [x] Provide a stretch compatibility (0.0.6)
 * [x] Correct update cron (0.0.11)
 * [x] Prevent https redirection before certificate generation (0.0.12)
+* [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
