@@ -7,7 +7,7 @@ ifeq ($(strip $(VERSION)),)
 	ifeq ($(strip $(VERSION)),)
 		VERSION="0.0.0"
 	endif
-	ITERATION=`date +'%y%m%d%H%M%S'`
+	ITERATION=$(shell date +'%y%m%d%H%M%S')
 endif
 
 .PHONY: clean package
