@@ -1,4 +1,4 @@
-NAME=alternc-certbot
+NAME=alternc-certificate-provider-letsencrypt
 VERSION=$(shell git tag -l --points-at HEAD)
 ITERATION=""
 
@@ -24,12 +24,14 @@ package:
 	fpm -s dir -t deb \
 		-n $(NAME) \
 		-v $(VERSION) \
+		--provides "alternc-certbot" \
+		--conflicts "alternc-certbot" \
 		`if [ "$(ITERATION)" ]; then echo "--iteration $(ITERATION)"; fi` \
 		-m alternc@webelys.com \
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "apt-utils, debconf, alternc (>> 3.2.10), alternc-ssl, certbot, certbot" \
+		--depends "apt-utils, debconf, alternc (>> 3.5.0), alternc-ssl, certbot, certbot" \
 		--deb-config "debian/config" \
 		--deb-templates "debian/templates" \
 		--after-install "debian/postinst" \

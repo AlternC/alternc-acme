@@ -1,6 +1,6 @@
 {
 	"package": {
-		"name": "alternc-certbot",
+		"name": "alternc-certificate-provider-letsencrypt",
 		"repo": "stable",
 		"subject": "alternc",
 		"vcs_url": "https://github.com/AlternC/alternc-certbot.git",
@@ -15,7 +15,7 @@
 			"uploadPattern": "pool/main/a/alternc/$1",
 			"matrixParams": {
 				"override": 1,
-				"deb_distribution": "wheezy,jessie,stable",
+				"deb_distribution": "jessie,stable",
 				"deb_component": "main",
 				"deb_architecture": "all"
 			}

@@ -9,10 +9,9 @@ When a domain is added, plugin try to get new certificate. As dns service can be
 # Requirement
 
 You need :
-* debian server (from wheezy to Stretch)
-* alternc >= 3.2
+* debian server (from Jessie)
+* alternc >= 3.5
 * certbot package
- * with wheezy : [from antonbatenev backport](https://software.opensuse.org//download.html?project=home%3Aantonbatenev%3Aletsencrypt&package=certbot)
  * with jessie : [from backport](https://packages.debian.org/jessie-backports/certbot)
  * with stretch : [from stable](https://packages.debian.org/stretch/certbot)
 * [apt-transport-https](https://packages.debian.org/search?keywords=apt-transport-https) package to use https bintray service.
@@ -29,15 +28,8 @@ You can download last package from :
 
 ### With Wheezy
 
-```shell
-apt-get install apt-transport-https
-echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
-echo 'deb http://download.opensuse.org/repositories/home:/antonbatenev:/letsencrypt/Debian_7.0/ /' > /etc/apt/sources.list.d/certbot.list
-apt-get update
-apt-get install certbot
-apt-get install alternc-certbot
-alternc.install
-```
+No more supported (last compatible version is 0.0.14)
+
 ### With Jessie
 
 ```shell
@@ -104,3 +96,5 @@ make
 * [x] Correct update cron (0.0.11)
 * [x] Prevent https redirection before certificate generation (0.0.12)
 * [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
+* [] Stop old debian support
+* [] Renaming project to follow AlternC recommandation (since 3.5.x)
