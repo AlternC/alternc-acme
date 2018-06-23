@@ -50,17 +50,6 @@ class m_certbot
         global $cuid, $msg, $ssl;
         $msg->log("certbot", "import");
 
-        //Get SSL set to this account
-        $ssl_list = $ssl->get_list();
-
-        $ssl_vhosts = array();
-        foreach ($ssl_list as $ssl_item) {
-            $ssl_vhosts[$ssl_item['fqdn']] = array(
-                    'certid' => $ssl_item['id'],
-                    'sslkey' => $ssl_item['sslkey']
-                    ) ;
-        }
-
         $output = "";
         $return_var = -1;
         exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>/dev/null", $output, $return_var);
@@ -71,15 +60,7 @@ class m_certbot
             $crt = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/cert.pem');
             $chain = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/chain.pem');
 
-            if (
-                    !isset($ssl_vhosts[$fqdn]) ||
-                    (
-                     isset($ssl_vhosts[$fqdn]) &&
-                     $ssl_vhosts[$fqdn]['sslkey'] != $key
-                    )
-               ) {
-                return $ssl->import_cert($key, $crt, $chain);
-            }
+            return $ssl->import_cert($key, $crt, $chain, "letsencrypt");
         }
         return false;
     }
