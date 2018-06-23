@@ -22,7 +22,7 @@ function vprint( $message, $params ){
 chdir("/usr/share/alternc/panel/");
 require("/usr/share/alternc/panel/class/config_nochk.php");
 
-// On passe super-admin
+// we goes root 
 $admin->enabled=1;
 
 // Get all alternc accounts
@@ -53,8 +53,8 @@ if( ! count( $domainsList ) ){
 
 vprint( _("Requiring Certbot renewal for %s domains\n"), count( $domainsList )); 
 
+$spacer="                                                                                 ";
 foreach ($domainsList as $key => $sub_domain) {
-    $spacer="                                                                                 ";
     vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain )); 
     if( ! $certbot->isLocalAlterncDomain( $sub_domain ) ){
         continue;
@@ -62,6 +62,18 @@ foreach ($domainsList as $key => $sub_domain) {
     vprint( _(" hosted locally, running certbot..."), array( )); 
 
     $certbot->import($sub_domain);
+}
+vprint( _("\nFinished Certbot renewal, now doing system certs\n"), count( $domainsList ));
+
+/* Also create TLS certificates for system FQDN (panel, dovecot, postfix, proftpd, mailman ... */
+foreach($ssl->get_fqdn_specials() as $specialfqdn) {
+    vprint( _("\r$spacer\rRequesting domain %s"), array( $specialfqdn ));
+    if( ! $certbot->isLocalAlterncDomain( $specialfqdn ) ){
+        continue;
+    }
+    vprint( _(" hosted locally, running certbot..."), array( ));
+
+    $certbot->import($specialfqdn);
 }
 vprint( _("\nFinished Certbot renewal\n"), count( $domainsList ));
 
