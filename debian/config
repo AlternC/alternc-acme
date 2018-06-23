@@ -3,6 +3,4 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-# Do you like debian?
-db_input high alternc-certbot/mail || true
 db_go

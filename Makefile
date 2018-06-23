@@ -33,7 +33,6 @@ package:
 		--architecture all \
 		--depends "apt-utils, debconf, alternc (>> 3.5.0), alternc-ssl, certbot, certbot" \
 		--deb-config "debian/config" \
-		--deb-templates "debian/templates" \
 		--after-install "debian/postinst" \
 		--after-remove  "debian/postrm" \
 		--chdir src \
