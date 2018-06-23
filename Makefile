@@ -24,7 +24,6 @@ package:
 	fpm -s dir -t deb \
 		-n $(NAME) \
 		-v $(VERSION) \
-		--provides "alternc-certbot" \
 		--conflicts "alternc-certbot" \
 		`if [ "$(ITERATION)" ]; then echo "--iteration $(ITERATION)"; fi` \
 		-m alternc@webelys.com \

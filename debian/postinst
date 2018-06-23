@@ -35,9 +35,6 @@ case "$1" in
 	    echo "**********************************************"
 	    echo -e "\033[0m"
 
-		# Unset old package alternc-certbot value
-		echo UNREGISTER alternc-certbot/mail | debconf-communicate alternc-certbot
-
 	;;
 
 	abort-upgrade|abort-remove|abort-deconfigure)
