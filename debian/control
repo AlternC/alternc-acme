@@ -1,0 +1,27 @@
+Source: alternc-certificate-provider-letsencrypt
+Section: admin
+Priority: optional
+Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+
+Package: alternc-certificate-provider-letsencrypt
+Architecture: all
+Depends: apt-utils,
+       , debconf,
+       , alternc (>= 3.5.0~rc1),
+       , certbot
+       , ${misc:Depends}
+Conflicts: alternc-certbot
+Provides: alternc-certificate-provider
+Description: Letsencrypt certificate plugin for AlternC
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites, domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
+ .
+ This extension to AlternC provide you with an automated way of
+ managing tls certificate by using Letsencrypt certbot, and pushes
+ certificates into alternC database automatically.
+ .
+ More information at https://alternc.com/
+Homepage: https://alternc.com/

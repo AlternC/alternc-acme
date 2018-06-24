@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# This file is public domain software, originally written by Joey Hess.
+#
+# This version is for a multibinary package. It also allows you to build any
+# of the binary packages independantly, via binary-<package> targets.
+
+# Uncomment this to turn on verbose mode. 
+export DH_VERBOSE=1
+
+override_dh_install:
+	#dh install
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-certificate-provider-letsencrypt
+
+%:
+	dh $@
+

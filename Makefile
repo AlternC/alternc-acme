@@ -17,9 +17,6 @@ all: clean package
 clean:
 	rm -f $(NAME)_*.deb
 
-translate:
-	po2debconf -o debian/templates debian/templates
-
 package:
 	fpm -s dir -t deb \
 		-n $(NAME) \
@@ -30,9 +27,11 @@ package:
 		--license GPLv3 \
 		--category admin \
 		--architecture all \
-		--depends "apt-utils, debconf, alternc (>> 3.5.0), alternc-ssl, certbot, certbot" \
-		--deb-config "debian/config" \
+		--depends "apt-utils, debconf, alternc (>= 3.5.0~rc1), alternc-ssl, certbot, certbot" \
 		--after-install "debian/postinst" \
 		--after-remove  "debian/postrm" \
 		--chdir src \
 		.
+install:
+	cp -r src/* $(DESTDIR)/
+

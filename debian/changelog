@@ -1,0 +1,6 @@
+alternc-certificate-provider-letsencrypt (0.0.15) stable; urgency=low
+
+  * initial AlternC Certificate provider for AlternC 3.5 for Jessie & Stretch
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Sun, 24 Jun 2018 17:26:00 +0200
+
