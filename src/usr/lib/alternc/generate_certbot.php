@@ -46,24 +46,27 @@ foreach ($accounts as $cuid => $infos) {
     }
     $mem->unsu();
 }
-// No need to request anything: exit
-if( ! count( $domainsList ) ){
-   return;
-}
-
-vprint( _("Requiring Certbot renewal for %s domains\n"), count( $domainsList )); 
-
 $spacer="                                                                                 ";
-foreach ($domainsList as $key => $sub_domain) {
-    vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain )); 
-    if( ! $certbot->isLocalAlterncDomain( $sub_domain ) ){
-        continue;
-    }   
-    vprint( _(" hosted locally, running certbot..."), array( )); 
 
-    $certbot->import($sub_domain);
+// Need to request anything: 
+if(  count( $domainsList ) ){
+
+
+    vprint( _("Requiring Certbot renewal for %s domains\n"), count( $domainsList )); 
+    
+    foreach ($domainsList as $key => $sub_domain) {
+        vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain )); 
+        if( ! $certbot->isLocalAlterncDomain( $sub_domain ) ){
+            continue;
+        }   
+        vprint( _(" hosted locally, running certbot..."), array( )); 
+        
+        $certbot->import($sub_domain);
+    }
+    vprint( _("\nFinished Certbot renewal, now doing system certs\n"), count( $domainsList ));
+} else {
+    vprint( _("\nNo standard Certbot renewal to do, now doing system certs\n"), count( $domainsList ));
 }
-vprint( _("\nFinished Certbot renewal, now doing system certs\n"), count( $domainsList ));
 
 /* Also create TLS certificates for system FQDN (panel, dovecot, postfix, proftpd, mailman ... */
 foreach($ssl->get_fqdn_specials() as $specialfqdn) {
