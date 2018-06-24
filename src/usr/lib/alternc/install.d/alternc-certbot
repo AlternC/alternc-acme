@@ -3,9 +3,19 @@
 ## Load Alternc variable
 . /etc/alternc/local.sh
 
-if [ "$1" == "apache2" ]; then
+# if letsencrypt account folder is empty, register
+if [ ! -d "/etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org" ]
+then
+    certbot --agree-tos --email "admin@$FQDN" register
+    if [ "$?" != 0 ]
+    then
+	echo "WARNING: I was not able to register an account on Letsencrypt with the email admin@$FQDN"
+	echo "You will need to register manually before using certbot. Use : "
+	echo "certbot register --agree-tos --email <your email address>"
+    fi
+fi
 
-    MAIL="admin@$FQDN"
+if [ "$1" == "apache2" ]; then
 
     if [ ! -d /var/lib/letsencrypt/ ]; then
         mkdir /var/lib/letsencrypt/
