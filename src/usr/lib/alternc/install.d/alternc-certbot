@@ -10,15 +10,6 @@ if [ "$1" == "apache2" ]; then
     if [ ! -d /var/lib/letsencrypt/ ]; then
         mkdir /var/lib/letsencrypt/
     fi
-    if certbot --agree-tos --email "$MAIL" --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d "$FQDN"
-    then
-        cat "/etc/letsencrypt/live/$FQDN/privkey.pem" > /etc/alternc/apache.pem
-        cat "/etc/letsencrypt/live/$FQDN/fullchain.pem" >> /etc/alternc/apache.pem
-    fi
-
-    ##UPDATE SSL quota
-    mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE defquotas SET value=1,quota='ssl' WHERE quota = 'ssl';"
-    mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE quotas SET total=1,name='ssl' WHERE name = 'ssl';"
 
     ##Generate let's encrypt certificate
     /usr/lib/alternc/generate_certbot.php --verbose
