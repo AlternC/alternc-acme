@@ -1,19 +1,20 @@
 # Purpose
 
-This alternc plugin get any certificate with let's encrypt service. It genereate :
-* a panel certificate (use with apache.pem)
+This AlternC plugin get certificates with Letsencrypt service. It generates:
+* a panel certificate (as apache.pem)
 * any certificate to each domains hosted
 
-When a domain is added, plugin try to get new certificate. As dns service can be in late, we can have a delay before to see any new certificate.
+When a domain is added, the plugin try to get a new certificate.
+We check that the DNS is answering with our PUBLIC_IP before asking Letsencrypt 
 
-# Requirement
+# Requirements
 
-You need :
-* debian server (from Jessie)
-* alternc >= 3.5
-* certbot package
- * with jessie : [from backport](https://packages.debian.org/jessie-backports/certbot)
- * with stretch : [from stable](https://packages.debian.org/stretch/certbot)
+You'll need :
+* a Debian server (from Jessie)
+* AlternC >= 3.5
+* The Certbot package
+ * with Jessie : [from backports](https://packages.debian.org/jessie-backports/certbot)
+ * with Stretch : [from stable](https://packages.debian.org/stretch/certbot) or [from backports](https://packages.debian.org/stretch-backports/certbot) for wildcards
 * [apt-transport-https](https://packages.debian.org/search?keywords=apt-transport-https) package to use https bintray service.
 
 
@@ -25,12 +26,13 @@ You can download last package from :
 * github : [release page](../../releases/latest)
 * bintray : [ ![Bintray](https://api.bintray.com/packages/alternc/stable/alternc-certbot/images/download.svg) ](https://bintray.com/alternc/stable/alternc-certbot/_latestVersion)
 * from bintray repository
+* on AlternC official repository at https://debian.alternc.org/
 
-### With Wheezy
+### On Wheezy
 
 No more supported (last compatible version is 0.0.14)
 
-### With Jessie
+### On Jessie
 
 ```shell
 apt-get install apt-transport-https
@@ -42,7 +44,7 @@ apt-get install alternc-certificate-provider-letsencrypt
 alternc.install
 ```
 
-### With Stretch
+### On Stretch
 
 ```shell
 apt-get install apt-transport-https
@@ -66,14 +68,14 @@ alternc.install
 
 # Configuration and Activation
 
-Once alternc-certificate-provider-letsencrypt installed , you must :
+Once alternc-certificate-provider-letsencrypt is installed, you must:
 * run **alternc.install**
 
 You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
 
 # Packaging from source
 
-To generate package we use [fpm tool](https://github.com/jordansissel/fpm)
+To generate package we use either debuild on feature-package branch, or [fpm tool](https://github.com/jordansissel/fpm) on master:
 
 ```shell
 apt-get install ruby ruby-dev rubygems build-essential
@@ -96,5 +98,7 @@ make
 * [x] Correct update cron (0.0.11)
 * [x] Prevent https redirection before certificate generation (0.0.12)
 * [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
-* [] Stop old debian support
-* [] Renaming project to follow AlternC recommandation (since 3.5.x)
+* [x] Stop old debian support
+* [x] Renaming project to follow AlternC recommandation (since 3.5.x)
+* [ ] push into official AlternC repository
+
