@@ -12,7 +12,7 @@ endif
 
 .PHONY: clean package
 
-all: clean package
+all: 
 
 clean:
 	rm -f $(NAME)_*.deb

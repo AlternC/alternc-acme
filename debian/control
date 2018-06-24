@@ -8,7 +8,8 @@ Standards-Version: 3.9.8
 Package: alternc-certificate-provider-letsencrypt
 Architecture: all
 Depends: apt-utils,
-       , debconf,
+       , php-cli
+       , debconf
        , alternc (>= 3.5.0~rc1),
        , certbot
        , ${misc:Depends}
