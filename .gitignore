@@ -3,3 +3,4 @@ debian/*.substvars
 debian/alternc-certificate-provider-letsencrypt
 debian/.debhelper
 debian/debhelper-build-stamp
+*.gpg
