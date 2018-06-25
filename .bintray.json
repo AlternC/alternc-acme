@@ -11,7 +11,7 @@
 	},
 	"files": [
 		{
-			"includePattern": "./(.*\\.deb)",
+			"includePattern": "../(.*\\.deb)",
 			"uploadPattern": "pool/main/a/alternc/$1",
 			"matrixParams": {
 				"override": 1,
