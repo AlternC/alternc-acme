@@ -8,6 +8,21 @@
 # Uncomment this to turn on verbose mode. 
 export DH_VERBOSE=1
 
+#Define version packaging
+VERSION=$(shell git tag -l --points-at HEAD)
+ifeq ($(strip $(VERSION)),)
+	VERSION=$(shell git describe --tags --abbrev=0)
+	ifeq ($(strip $(VERSION)),)
+		export VERSION="0.0.0"
+	endif
+	VERSION:=$(VERSION)~$(shell date +'%y%m%d%H%M%S')
+endif
+
+clean:
+	dh clean
+	git checkout debian/changelog
+	dch -m -b -v $(VERSION) autobuild
+
 override_dh_install:
 	#dh install
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-certificate-provider-letsencrypt
