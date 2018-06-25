@@ -5,7 +5,7 @@ This AlternC plugin get certificates with Letsencrypt service. It generates:
 * any certificate to each domains hosted
 
 When a domain is added, the plugin try to get a new certificate.
-We check that the DNS is answering with our PUBLIC_IP before asking Letsencrypt 
+We check that the DNS is answering with our PUBLIC_IP before asking Letsencrypt
 
 # Requirements
 
@@ -100,5 +100,7 @@ make
 * [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
 * [x] Stop old debian support
 * [x] Renaming project to follow AlternC recommandation (since 3.5.x)
+* [x] Change packaging system, move to debuild solution (0.0.15)
 * [ ] push into official AlternC repository
+
 
