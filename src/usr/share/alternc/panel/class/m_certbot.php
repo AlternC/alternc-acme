@@ -65,7 +65,8 @@ class m_certbot
 
             return $ssl->import_cert($key, $crt, $chain, "letsencrypt");
         }
-        $msg->log("certbot", "import","import failed, log is ".implode(" ",$output));
+        // Or log the error:
+        $msg->log("certbot", "import","import failed, log is ".implode("\n        ",$output));
         return false;
     }
 

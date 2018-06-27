@@ -68,7 +68,26 @@ if(  count( $domainsList ) ){
     foreach ($domainsList as $key => $sub_domain) {
         // Check if we already have a valid cert for this domain (valid for more than $VALID_DAYS days
         // Either the subdomain (first, quicker), or any Certificate found for this FQDN
+        if ($sub_domain["certificate_id"]) {
+
+            // trick below: false=>not found, 0 => Snakeoil == skip both
+            if ( $current = $ssl->get_certificate($sub_domain["certificate_id"],true) ) { 
+
+                // found, is it valid ? (fqdn match) (skips panel one) 
+                if ($ssl->fqdnMatch($current["fqdn"],$sub_domain["fqdn"])) {
+                    // found and valid, (works for wildcards too ;) )
+                    // now what about the date?
+                    if ($current["validstartts"]>time()
+                    && $current["validendts"]>(time()+(86400*$VALID_DAYS))
+                    ) {
+                        // valid at least for $VALID_DAYS from now, let's skip this one for now
+                        continue;
+                    }
+                }
+            }
+        }
         
+        // not found or invalid or expired soon, let's get one: 
         vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain["fqdn"] )); 
         if( ! $certbot->isLocalAlterncDomain( $sub_domain["fqdn"] ) ){
             continue;
