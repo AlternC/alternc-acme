@@ -2,7 +2,9 @@ Source: alternc-certificate-provider-letsencrypt
 Section: admin
 Priority: optional
 Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
-Build-Depends: debhelper (>= 9), git
+Build-Depends: debhelper (>= 9),
+               devscripts,
+               git
 Standards-Version: 3.9.8
 
 Package: alternc-certificate-provider-letsencrypt
