@@ -20,7 +20,7 @@ endif
 
 clean:
 	dh clean
-	git checkout debian/changelog
+	git rev-parse --git-dir >/dev/null 2>&1 && git checkout debian/changelog || true
 	dch -m -b -v $(VERSION) autobuild
 
 override_dh_install:
