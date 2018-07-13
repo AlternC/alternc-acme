@@ -18,8 +18,23 @@ if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $mem->su($db->f('compte'));
 
     $dom->lock();
+    $domains = $dom->get_domain_all($domain_name);
+    $sub_domains = array();
     $certbot->import($domain_name);
+    // Build a list of fqdns to import, excluding dns only entries.
+    // This reduces repeat calls to import for duplicate sub domains.
+    foreach ($domains['sub'] as $index => $sub_domain) {
+        if (!$sub_domain['name'] || $sub_domain['only_dns']) {
+            continue;
+        }
+        $fqdn = "${sub_domain['name']}.${domain_name}";
+        if (!in_array($fqdn, $sub_domains)) {
+            $sub_domains[] = $fqdn;
+        }
+    }
+    foreach ($sub_domains as $fqdn) {
+        $certbot->import($fqdn);
+    }
     $dom->unlock();
-
     $mem->unsu();
 }
