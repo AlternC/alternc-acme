@@ -9,11 +9,13 @@ $admin->enabled=1;
 
 if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $domain_name = $argv[2];
-    $info = $dom->get_sub_domain_id_and_member_by_name($domain_name);
-
-    $err->log("certbot", "dns_reload_zone ".$domain_name);
-
-    $mem->su($info['member_id']);
+    $db->query('select id, compte from domaines where domaine = ?',
+               array($domain_name));
+    if (!$db->next_record()) {
+        $err->log('certbot', 'reload.d - dns_reload_z<one - Unable to find domain information for ' . $domain_name);
+        exit -1;
+    }
+    $mem->su($db->f('compte'));
 
     $dom->lock();
     $certbot->import($domain_name);
