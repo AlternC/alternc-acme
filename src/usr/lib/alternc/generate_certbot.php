@@ -68,7 +68,7 @@ if(  count( $domainsList ) ){
     foreach ($domainsList as $key => $sub_domain) {
         // Check if we already have a valid cert for this domain (valid for more than $VALID_DAYS days
         // Either the subdomain (first, quicker), or any Certificate found for this FQDN
-        if ($sub_domain["certificate_id"]) {
+        if (isset($sub_domain["certificate_id"])) {
 
             // trick below: false=>not found, 0 => Snakeoil == skip both
             if ( $current = $ssl->get_certificate($sub_domain["certificate_id"],true) ) { 
