@@ -51,7 +51,7 @@ foreach ($accounts as $cuid => $infos) {
         // Get all hosts (subdomain)
         foreach ($domain_data['sub'] as $sub_domain) {
             if ($is_vhost[$sub_domain["type"]]) {
-                $domainsList[] = $sub_domain;
+                $domainsList[] = array('sub_domain' => $sub_domain, 'cuid' => $cuid);
             }
         }
         $dom->unlock();
@@ -66,15 +66,16 @@ if(  count( $domainsList ) ){
     vprint( _("Requiring Certbot renewal for %s domains\n"), count( $domainsList )); 
     
     foreach ($domainsList as $key => $sub_domain) {
+        $mem->su($sub_domain["cuid"]);
         // Check if we already have a valid cert for this domain (valid for more than $VALID_DAYS days
         // Either the subdomain (first, quicker), or any Certificate found for this FQDN
-        if ($sub_domain["certificate_id"]) {
+        if (isset($sub_domain['domain']["certificate_id"])) {
 
             // trick below: false=>not found, 0 => Snakeoil == skip both
-            if ( $current = $ssl->get_certificate($sub_domain["certificate_id"],true) ) { 
+            if ( $current = $ssl->get_certificate($sub_domain["sub_domain"]["certificate_id"],true) ) { 
 
                 // found, is it valid ? (fqdn match) (skips panel one) 
-                if ($ssl->fqdnMatch($current["fqdn"],$sub_domain["fqdn"])) {
+                if ($ssl->fqdnMatch($current["fqdn"],$sub_domain["sub_domain"]["fqdn"])) {
                     // found and valid, (works for wildcards too ;) )
                     // now what about the date?
                     if ($current["validstartts"]>time()
@@ -88,13 +89,13 @@ if(  count( $domainsList ) ){
         }
         
         // not found or invalid or expired soon, let's get one: 
-        vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain["fqdn"] )); 
-        if( ! $certbot->isLocalAlterncDomain( $sub_domain["fqdn"] ) ){
+        vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain["sub_domain"]["fqdn"] )); 
+        if( ! $certbot->isLocalAlterncDomain( $sub_domain["sub_domain"]["fqdn"] ) ){
             continue;
         }   
         vprint( _(" hosted locally, running certbot..."), array( )); 
         
-        $certbot->import($sub_domain["fqdn"]);
+        $certbot->import($sub_domain["sub_domain"]["fqdn"]);
     }
     vprint( _("\nFinished Certbot renewal, now doing system certs\n"), count( $domainsList ));
 } else {
