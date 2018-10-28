@@ -20,6 +20,7 @@ endif
 
 clean:
 	dh clean
+	rm -f debian/files
 	git checkout debian/changelog
 	dch -m -b -v $(VERSION) autobuild
 

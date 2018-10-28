@@ -1,6 +1,7 @@
 debian/*.debhelper.log
 debian/*.substvars
 debian/alternc-certificate-provider-letsencrypt
+debian/files
 debian/.debhelper
 debian/debhelper-build-stamp
 *.gpg
