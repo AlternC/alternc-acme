@@ -9,15 +9,32 @@ $admin->enabled=1;
 
 if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $domain_name = $argv[2];
-    $info = $dom->get_sub_domain_id_and_member_by_name($domain_name);
-
-    $err->log("certbot", "dns_reload_zone ".$domain_name);
-
-    $mem->su($info['member_id']);
+    $db->query('select id, compte from domaines where domaine = ?',
+               array($domain_name));
+    if (!$db->next_record()) {
+        $err->log('certbot', 'reload.d - dns_reload_z<one - Unable to find domain information for ' . $domain_name);
+        exit -1;
+    }
+    $mem->su($db->f('compte'));
 
     $dom->lock();
+    $domains = $dom->get_domain_all($domain_name);
+    $sub_domains = array();
     $certbot->import($domain_name);
+    // Build a list of fqdns to import, excluding dns only entries.
+    // This reduces repeat calls to import for duplicate sub domains.
+    foreach ($domains['sub'] as $index => $sub_domain) {
+        if (!$sub_domain['name'] || $sub_domain['only_dns']) {
+            continue;
+        }
+        $fqdn = "${sub_domain['name']}.${domain_name}";
+        if (!in_array($fqdn, $sub_domains)) {
+            $sub_domains[] = $fqdn;
+        }
+    }
+    foreach ($sub_domains as $fqdn) {
+        $certbot->import($fqdn);
+    }
     $dom->unlock();
-
     $mem->unsu();
 }
