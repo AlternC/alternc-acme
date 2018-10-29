@@ -5,7 +5,7 @@
 # This version is for a multibinary package. It also allows you to build any
 # of the binary packages independantly, via binary-<package> targets.
 
-# Uncomment this to turn on verbose mode. 
+# Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
 
 #Define version packaging
@@ -21,8 +21,8 @@ endif
 clean:
 	dh clean
 	rm -f debian/files
-  git rev-parse --git-dir >/dev/null 2>&1 && git checkout debian/changelog || true
-	git rev-parse --git-dir >/dev/null 2>&1 && dch -m -b -v $(VERSION) autobuild || true
+	(git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
+	(git rev-parse --git-dir > /dev/null 2>&1 && dch -m -b -v $(VERSION) autobuild) || true
 
 override_dh_install:
 	#dh install
