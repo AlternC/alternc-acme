@@ -35,6 +35,17 @@ foreach($types as $type=>$data) {
     $is_vhost[$type]=($data["only_dns"]==0);
 }
 
+// Request system domains before user certificates.
+foreach($ssl->get_fqdn_specials() as $specialfqdn) {
+    vprint( _("\r$spacer\rRequesting domain %s"), array( $specialfqdn ));
+    if( ! $certbot->isLocalAlterncDomain( $specialfqdn ) ){
+        continue;
+    }
+    vprint( _(" hosted locally, running certbot..."), array( ));
+
+    $certbot->import($specialfqdn);
+}
+
 // Get all alternc accounts
 $accounts = $admin->get_list(1, 0, false, 'domaine');
 
@@ -102,15 +113,4 @@ if(  count( $domainsList ) ){
     vprint( _("\nNo standard Certbot renewal to do, now doing system certs\n"), count( $domainsList ));
 }
 
-/* Also create TLS certificates for system FQDN (panel, dovecot, postfix, proftpd, mailman ... */
-foreach($ssl->get_fqdn_specials() as $specialfqdn) {
-    vprint( _("\r$spacer\rRequesting domain %s"), array( $specialfqdn ));
-    if( ! $certbot->isLocalAlterncDomain( $specialfqdn ) ){
-        continue;
-    }
-    vprint( _(" hosted locally, running certbot..."), array( ));
-
-    $certbot->import($specialfqdn);
-}
 vprint( _("\nFinished Certbot renewal\n"), count( $domainsList ));
-
