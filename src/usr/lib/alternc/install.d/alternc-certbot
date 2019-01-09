@@ -22,5 +22,5 @@ if [ "$1" == "apache2" ]; then
     fi
 
     ##Generate let's encrypt certificate
-    /usr/lib/alternc/generate_certbot.php --verbose
+    /usr/lib/alternc/generate_certbot.php
 fi
