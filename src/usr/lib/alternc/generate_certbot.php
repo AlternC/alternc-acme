@@ -35,6 +35,8 @@ foreach($types as $type=>$data) {
     $is_vhost[$type]=($data["only_dns"]==0);
 }
 
+$spacer="                                                                                 ";
+
 // Request system domains before user certificates.
 foreach($ssl->get_fqdn_specials() as $specialfqdn) {
     vprint( _("\r$spacer\rRequesting domain %s"), array( $specialfqdn ));
@@ -69,7 +71,6 @@ foreach ($accounts as $cuid => $infos) {
     }
     $mem->unsu();
 }
-$spacer="                                                                                 ";
 
 // Need to request anything: 
 if(  count( $domainsList ) ){
