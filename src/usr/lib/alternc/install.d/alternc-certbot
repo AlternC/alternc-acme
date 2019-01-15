@@ -15,6 +15,13 @@ then
     fi
 fi
 
+# By default generate_certbot.php should be verbose, any caller may pass
+# --quiet to disable verbose output.
+VERBOSE='--verbose'
+if [[ " $@ " =~ " --quiet " ]] ; then
+    VERBOSE=''
+fi
+
 if [ "$1" == "apache2" ]; then
 
     if [ ! -d /var/lib/letsencrypt/ ]; then
@@ -22,5 +29,5 @@ if [ "$1" == "apache2" ]; then
     fi
 
     ##Generate let's encrypt certificate
-    /usr/lib/alternc/generate_certbot.php
+    /usr/lib/alternc/generate_certbot.php "$VERBOSE"
 fi
