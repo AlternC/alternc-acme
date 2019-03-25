@@ -62,8 +62,12 @@ foreach ($accounts as $cuid => $infos) {
         $dom->lock();
         $domain_data = $dom->get_domain_all($domain);
         // Get all hosts (subdomain)
+        if (!isset($domain_data['sub'])) {
+            continue;
+        }
         foreach ($domain_data['sub'] as $sub_domain) {
-            if ($is_vhost[$sub_domain["type"]]) {
+            if (in_array($sub_domain['type'], $is_vhost) &&
+                $is_vhost[strtolower($sub_domain["type"])]) {
                 $domainsList[] = array('sub_domain' => $sub_domain, 'cuid' => $cuid);
             }
         }
