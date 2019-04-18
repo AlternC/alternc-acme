@@ -4,7 +4,8 @@
 . /etc/alternc/local.sh
 
 # if letsencrypt account folder is empty, register
-if [ ! -d "/etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org" ]
+if [ ! -d "/etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org" ] &&
+       [ ! -d "/etc/letsencrypt/accounts/acme-v02.api.letsencrypt.org" ]
 then
     certbot --agree-tos --email "admin@$FQDN" register
     if [ "$?" != 0 ]
