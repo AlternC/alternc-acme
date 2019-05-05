@@ -79,7 +79,7 @@ class m_certbot
     {
         global $L_PUBLIC_IP;
         $out=array();
-        exec("dig A +trace ".escapeshellarg($fqdn), $out);
+        exec("dig A ".escapeshellarg($fqdn), $out);
         foreach ($out as $line) {
             if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $L_PUBLIC_IP) {
                 return true;
