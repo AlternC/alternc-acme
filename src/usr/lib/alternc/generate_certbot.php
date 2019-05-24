@@ -131,7 +131,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
                 if ( $current = $ssl->get_certificate($sub_domain["sub_domain"]["certificate_id"],true) ) { 
 
                     // found, is it valid ? (fqdn match) (skips panel one)
-                    if ($ssl->fqdnMatch($current["fqdn"],$sub_domain["sub_domain"]["fqdn"])) {
+                    if ($ssl->fqdnmatch($current["fqdn"],$sub_domain["sub_domain"]["fqdn"])) {
                         // found and valid, (works for wildcards too ;) )
                         // now what about the date?
                         if ($current["validstartts"]>time()
