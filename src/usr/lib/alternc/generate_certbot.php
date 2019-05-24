@@ -125,7 +125,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
             $mem->su($sub_domain["cuid"]);
             // Check if we already have a valid cert for this domain (valid for more than $VALID_DAYS days
             // Either the subdomain (first, quicker), or any Certificate found for this FQDN
-            if (isset($sub_domain['domain']["certificate_id"])) {
+            if (isset($sub_domain['sub_domain']["certificate_id"])) {
 
                 // trick below: false=>not found, 0 => Snakeoil == skip both
                 if ( $current = $ssl->get_certificate($sub_domain["sub_domain"]["certificate_id"],true) ) { 
