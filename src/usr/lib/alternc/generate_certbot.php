@@ -15,6 +15,9 @@
 
 // Renew a domain if we don't have a cert or if it expires $VALID_DAYS from now
 $VALID_DAYS = 30;
+// Use the difference in seconds to avoid re-calculating the value for each sub-domain
+$VALID_DIFF = 86400 * 30;
+
 // Which type of certificates should be requested: all, system, non-system.
 $REQUEST_CERTS="all";
 $ALLOWED_CERT_TYPES = array(
@@ -134,10 +137,11 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
                     if ($ssl->fqdnmatch($current["fqdn"],$sub_domain["sub_domain"]["fqdn"])) {
                         // found and valid, (works for wildcards too ;) )
                         // now what about the date?
-                        if ($current["validstartts"]>time()
-                            && $current["validendts"]>(time()+(86400*$VALID_DAYS))
-                        ) {
-                            // valid at least for $VALID_DAYS from now, let's skip this one for now
+                        $t = time();
+                        if ($current['validstartts'] < $t &&
+                            $t < (current['validendts'] - $VALID_DIFF)) {
+                            // currently valid, and valid for more than $VALID_DAYS
+                            // let's skip this one for now
                             continue;
                         }
                     }
