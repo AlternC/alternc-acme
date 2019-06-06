@@ -139,7 +139,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
                         // now what about the date?
                         $t = time();
                         if ($current['validstartts'] < $t &&
-                            $t < (current['validendts'] - $VALID_DIFF)) {
+                            $t < ($current['validendts'] - $VALID_DIFF)) {
                             // currently valid, and valid for more than $VALID_DAYS
                             // let's skip this one for now
                             continue;
