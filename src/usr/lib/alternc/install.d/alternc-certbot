@@ -23,6 +23,18 @@ if [[ " $@ " =~ " --quiet " ]] ; then
     VERBOSE=''
 fi
 
+# Set the default value to use if it isn't set.
+if [ -z "$ALTERNC_REQUEST_CERTIFICATES" ] ; then
+    ALTERNC_REQUEST_CERTIFICATES="all"
+fi
+
+# Leave which certificates are requested up to the environments variables,
+# unless "--all" is passed.
+CERTS=""
+if [[ " $@ " =~ " --all " ]] ; then
+    CERTS="--certificates all"
+fi
+
 if [ "$1" == "apache2" ]; then
 
     if [ ! -d /var/lib/letsencrypt/ ]; then
@@ -30,5 +42,5 @@ if [ "$1" == "apache2" ]; then
     fi
 
     ##Generate let's encrypt certificate
-    /usr/lib/alternc/generate_certbot.php "$VERBOSE"
+    ALTERNC_REQUEST_CERTIFICATES="$ALTERNC_REQUEST_CERTIFICATES" /usr/lib/alternc/generate_certbot.php "$VERBOSE" "$CERTS"
 fi
