@@ -32,7 +32,7 @@ fi
 # unless "--all" is passed.
 CERTS=""
 if [[ " $@ " =~ " --all " ]] ; then
-    CERTS="--certificates all"
+    CERTS="--certificates=all"
 fi
 
 if [ "$1" == "apache2" ]; then
