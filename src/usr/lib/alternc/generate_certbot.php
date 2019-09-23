@@ -5,9 +5,11 @@
   * using Letsencrypt and ACME 1.0 protocol, with HTTP validation
   * Called as a cron or as an interactive script during alternc.install
   *
-  * usage: [-v | --verbose] [-c TYPE | --certificates TYPE]
+  * usage: [-v | --verbose] [-c TYPE | --certificates TYPE] [-d DOMAIN1,DOMAIN2 | --domains DOMAIN1,DOMAIN2] [-f | --force]
   *   --verbose            display progress information (default = quiet)
   *   --certificates TYPE  which type of certificates to request: all, system, non-system
+  *   --domains            A comma separated list of specific domains to request
+  *   --force              Force the renewal request to happen (only when renewing specific domains)
   *
   * certificates defaults to "all", or the value of the environment variable
   * ALTERNC_REQUEST_CERTIFICATES (eg. in /etc/alternc/local.sh).
@@ -24,6 +26,8 @@ $ALLOWED_CERT_TYPES = array(
     'all',
     'system',
     'non-system',
+    'specific', // This is just used to differentiate the case of requesting
+    // only one (or more) specific domains.
 );
 
 // Use the environment variable as the default if it set.
@@ -31,10 +35,12 @@ if (getenv('ALTERNC_REQUEST_CERTIFICATES') !== FALSE) {
     $REQUEST_CERTS = getenv('ALTERNC_REQUEST_CERTIFICATES');
 }
 
-$short_options = 'vc:';
+$short_options = 'vcdf:';
 $long_options = array(
     'verbose',
-    'certificates:'
+    'certificates:',
+    'domains:',
+    'force:',
 );
 $options = getopt($short_options, $long_options);
 
@@ -44,6 +50,13 @@ $verbose = (in_array('v', array_keys($options)) || in_array('verbose', array_key
 // isn't set, use the default value.
 $REQUEST_CERTS= in_array('certificates', array_keys($options)) ? $options['certificates'] : (
     in_array('c', array_keys($options)) ? $options['c'] : $REQUEST_CERTS);
+$domains = in_array('domains', array_keys($options)) ? $options['domains'] : (
+    in_array('d', array_keys($options)) ? $options['d'] : NULL);
+if ($domains !== NULL) {
+    $domains = explode(',', $domains);
+    $REQUEST_CERTS = 'sepcific';
+}
+$force_request = (in_array('f', array_keys($options)) || in_array('force', array_keys($options))) ? True : False;
 
 function vprint( $message, $params ){
     global $verbose;
@@ -91,7 +104,18 @@ else {
     vprint(_("Skipping system certificates, requested certificates type: %s\n"), array($REQUEST_CERTS));
 }
 
-if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
+if ($REQUEST_CERTS == 'specific' && $domains !== NULL) {
+    foreach ($domains as $domain) {
+        $current = $ssl->get_valid_certs($domain, 'letsencrypt');
+        // @HACK @WIP
+        // Request the certificate if there are 2 or fewer results (the snakeoils),
+        // or if force_request is set.
+        if (sizeof($current) <= 2  || $force_request) {
+            $certbot->import($domain);
+        }
+    }
+}
+elseif ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
     // Get all alternc accounts
     $accounts = $admin->get_list(1, 0, false, 'domaine');
 
