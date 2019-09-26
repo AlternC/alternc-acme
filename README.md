@@ -50,7 +50,7 @@ alternc.install
 apt-get install apt-transport-https
 echo "deb [trusted=yes] https://dl.bintray.com/alternc/stable stable main"  >> /etc/apt/sources.list.d/alternc.list
 apt-get update
-apt-get install certbot alternc-certificate-provider-letsencrypt
+apt-get install certbot alternc-certbot
 alternc.install
 ```
 
