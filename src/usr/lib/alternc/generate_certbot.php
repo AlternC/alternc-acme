@@ -106,12 +106,37 @@ else {
 
 if ($REQUEST_CERTS == 'specific' && $domains !== NULL) {
     foreach ($domains as $domain) {
-        $current = $ssl->get_valid_certs($domain, 'letsencrypt');
-        // @HACK @WIP
-        // Request the certificate if there are 2 or fewer results (the snakeoils),
-        // or if force_request is set.
-        if (sizeof($current) <= 2  || $force_request) {
+        if (!$certbot->isLocalAlterncDomain($domain)) {
+            vprint(_("Skipping '%s', the domain is not a local AlternC domain"),
+                   array($domain));
+            continue;
+        }
+        foreach ($certs = $ssl->get_valid_certs($domain, 'letsencrypt') as $index => $certificate) {
+            // Remove the wildcard
+            if ($certificate['id'] == 0) {
+                unset($certs[$index]);
+            }
+
+            // Remove those whose providers do not match
+            if ($certificate['provider'] != 'letsencrypt') {
+                unset($certs[$index]);
+            }
+
+            // Unless this domain is the default fqdn, remove it.
+            if ($domain != $ssl->default_certificate_fqdn &&
+                $certificate['fqdn'] == $ssl->default_certificate_fqdn) {
+                unset($certs[$index]);
+            }
+        }
+
+        // Request if there are no valid certificates other than the defaults removed,
+        // or if the request is forced.
+        if (sizeof($certs) <= 0  || $force_request) {
+            vprint(_("Requesting import of certificate for '%s'"), array($domain));
             $certbot->import($domain);
+        }
+        else {
+            vprint(_("Skipping import of certificate for '%s' - already has at least one valid certificate"), array($domain));
         }
     }
 }
