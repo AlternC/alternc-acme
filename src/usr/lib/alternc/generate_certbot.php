@@ -35,12 +35,12 @@ if (getenv('ALTERNC_REQUEST_CERTIFICATES') !== FALSE) {
     $REQUEST_CERTS = getenv('ALTERNC_REQUEST_CERTIFICATES');
 }
 
-$short_options = 'vcdf:';
+$short_options = 'vc:d:f';
 $long_options = array(
     'verbose',
     'certificates:',
     'domains:',
-    'force:',
+    'force',
 );
 $options = getopt($short_options, $long_options);
 
