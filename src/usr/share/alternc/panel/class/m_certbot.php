@@ -76,17 +76,30 @@ class m_certbot
     * Checks if dig returns our L_PUBLIC_IP
     */
     public function isLocalAlterncDomain($fqdn)
-    {
-        global $L_PUBLIC_IP;
+    {   
+        global $L_PUBLIC_IP, $L_OTHER_IPS;
+        if ($L_OTHER_IPS != '') {
+            $ips = "$L_PUBLIC_IP,$L_OTHER_IPS";
+            $arr = explode(',', $ips);
+        }
         $out=array();
         exec("dig A +trace ".escapeshellarg($fqdn), $out);
         foreach ($out as $line) {
-            if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $L_PUBLIC_IP) {
-                return true;
-            }
+            if (is_array($arr)) {
+                foreach ($arr as $i) {
+                   if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $i) {
+                       return true;
+                   }
+                }
+             } else {
+                   if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $L_PUBLIC_IP) {
+                       return true;
+                   }
+             }
         }
         return false;
     }
+
 }
 
 /* Class m_certbot */
