@@ -85,7 +85,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'system') {
 
         $certbot->import($specialfqdn);
     }
-    vprintf(_("\rFinished renewal for system certificates\n"), array());
+    vprint(_("\rFinished renewal for system certificates\n"), array());
 }
 else {
     vprint(_("Skipping system certificates, requested certificates type: %s\n"), array($REQUEST_CERTS));
