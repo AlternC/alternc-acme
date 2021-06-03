@@ -94,6 +94,13 @@ class m_acme
         }
         return false;
     }
+
+    /**
+     * Execute certbot when domain is added
+     **/
+    public function hook_dom_add_domain($params) {
+        $domain = new m_domain() 
+    }
 }
 
 /* Class m_acme */
