@@ -8,20 +8,6 @@ before_install:
 install:
     - debuild '-k 077CC9F2'
 deploy:
-    - provider: bintray
-      skip_cleanup: true
-      file: .bintray.json
-      user: camlafit
-      key:
-          secure: GLk/hTt0zBuukw3k9399UY1Q3zFa0SsYTImc/eyDE6hgZZRgOx7gIGSt/OE5DKqWydaaVWrgA+7iji2tBkSAJ+AU+tf3ZaGaNUhUXjWQealBLn57m3ieTxzztPEYWL/VHU5UYEMs4RD82IPo5RdIgoKLV8cY+U+jsE06ecjjg7xVicaRB09Advpb2sy2iQ+x1PO9OOCkvejztkjFZfAvXvjphhsCsz4yYq1ipgJrBPjkln2HWK499/Ei7/BfuHPHu1J9tn3y5ng8dUjEoRVDCiHeXTLm1xpU7fYLRd3YTjLr+HJ+ioayGdlgCC7btbiDInsnaJ+WazE7MpenOAh9bmTt3A3Znd4ZJvpD8tYTFbwTTdnXpAtsD8T6n7LVCeBySvQoI6DljV53Lpn/M+Ip/onlhn4vY81e+gYNEV9fdpXoHfaIdRnn1Kau3P+OaubSXkoTXqlHxGh+lFvT310/QUzIkxoUEa7VFwGyxoscjUUTZhAzkg6OMsEsgT7GsXyih+w1lYy/al7Gosmf9s6mZaTH9Vbwqnf7OQY/LNSX7JAazYx/vip0ltzabWrUHdzP5Cl1uQNbVQ+3OuyKe8RFhFUF09vh9e3e3gDudVqyaeYziXmXsg1xh4LHQbzAbLhD2C2YqojOWBJJnGlF4tTX+u28oF+WpL9gEMttyfU5l60=
-    - provider: bintray
-      skip_cleanup: true
-      file: .bintray.release.json
-      user: camlafit
-      key:
-          secure: GLk/hTt0zBuukw3k9399UY1Q3zFa0SsYTImc/eyDE6hgZZRgOx7gIGSt/OE5DKqWydaaVWrgA+7iji2tBkSAJ+AU+tf3ZaGaNUhUXjWQealBLn57m3ieTxzztPEYWL/VHU5UYEMs4RD82IPo5RdIgoKLV8cY+U+jsE06ecjjg7xVicaRB09Advpb2sy2iQ+x1PO9OOCkvejztkjFZfAvXvjphhsCsz4yYq1ipgJrBPjkln2HWK499/Ei7/BfuHPHu1J9tn3y5ng8dUjEoRVDCiHeXTLm1xpU7fYLRd3YTjLr+HJ+ioayGdlgCC7btbiDInsnaJ+WazE7MpenOAh9bmTt3A3Znd4ZJvpD8tYTFbwTTdnXpAtsD8T6n7LVCeBySvQoI6DljV53Lpn/M+Ip/onlhn4vY81e+gYNEV9fdpXoHfaIdRnn1Kau3P+OaubSXkoTXqlHxGh+lFvT310/QUzIkxoUEa7VFwGyxoscjUUTZhAzkg6OMsEsgT7GsXyih+w1lYy/al7Gosmf9s6mZaTH9Vbwqnf7OQY/LNSX7JAazYx/vip0ltzabWrUHdzP5Cl1uQNbVQ+3OuyKe8RFhFUF09vh9e3e3gDudVqyaeYziXmXsg1xh4LHQbzAbLhD2C2YqojOWBJJnGlF4tTX+u28oF+WpL9gEMttyfU5l60=
-      on:
-          tags: true
     - provider: releases
       skip_cleanup: true
       file_glob: true
