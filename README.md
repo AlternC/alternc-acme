@@ -53,16 +53,12 @@ You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certifi
 
 # Packaging from source
 
-To generate package we use either debuild on feature-package branch, or [fpm tool](https://github.com/jordansissel/fpm) on master:
+To generate package we use either debuild / dpkg-buildpackage
 
 ```shell
-apt-get install ruby ruby-dev rubygems build-essential
-gem install --no-ri --no-rdoc fpm
-
+apt-get build-essential
 git clone https://github.com/AlternC/alternc-certbot
-cd alternc-certbot
-make
-
+dpkg-buildpackage -us -uc -b
 ```
 
 
