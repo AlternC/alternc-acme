@@ -1,18 +1,11 @@
-language : bash
-before_install:
-    - sudo apt-get -qq update
-    - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
-    - openssl aes-256-cbc -K $encrypted_c73435edf6b8_key -iv $encrypted_c73435edf6b8_iv
-      -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
-    - gpg --import 077CC9F2.gpg
-install:
-    - debuild '-k 077CC9F2'
-deploy:
-    - provider: releases
-      skip_cleanup: true
-      file_glob: true
-      file: "../*.deb"
-      api_key:
-          secure: "kIDGS4LaqEvLgcA2VwUu/dViTPi4k4DWbpKt2+oLNFROFYLScF2v0hh+W1TZRJcgZUQSbQcZfkj6Wcqq1zbSewnlRG2r1JhAs4fq/StBfb14p1kw/BRv8OTYl7I38PEaMqZ0P3UvjSby0n1hIXgpTD6Hq2n8IQXqo9x3FY8WWOjTFXppar21cQG/jdXsOSiNn0xRMlJ6GvR8Qeq9G66c/YYFrrnpDN0IV4LpyrgurV4nMEybFWw5Z/43xBrDdq3RoR+mI+2d4u/+ac2XDTNAIaji5RcdrWkOzgfkWvg8uZbCfjoMdTKSnFVu2oywONgdpETP5eRopHELBqUgx875I3KQ9PKR8c5canA9Tv548HoTY43x+fRa5Zm19k0SQ9h6kL+Es1wxAgrE0NpNoYv4o509DOqRDysUQ8OoRlwwRo8zMj/hpCH1OjEB+UQV6H7u+nmkzU9UNQfPPgjAAw2Lu7kUCwHwyylfxroE2aOtfEP4EnnKkYCQveHzqzTLHjopOZRKNc9glOCnbZh7wVBfiONQCJxiP7i2gSYmVoIB61xaJDXnNwE74a14Wg2DiQt5kqB9RKGa/uGJn1RSzxgxr5ddtbvahe3rp4J0cfvQlESKrcxv21BbfquDqOwCPO6mKDlOCmmR0u4+8EXilZXqPSE8gSFM/xYhv6XbVUKGqBk="
-      on:
-          tags: true
+sudo: required
+language: generic
+
+services:
+  - docker
+
+script:
+  - wget -O- http://travis.debian.net/script.sh | sh -
+
+if:
+  tag IS blank
