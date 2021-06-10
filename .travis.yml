@@ -16,3 +16,20 @@ deploy:
           secure: "kIDGS4LaqEvLgcA2VwUu/dViTPi4k4DWbpKt2+oLNFROFYLScF2v0hh+W1TZRJcgZUQSbQcZfkj6Wcqq1zbSewnlRG2r1JhAs4fq/StBfb14p1kw/BRv8OTYl7I38PEaMqZ0P3UvjSby0n1hIXgpTD6Hq2n8IQXqo9x3FY8WWOjTFXppar21cQG/jdXsOSiNn0xRMlJ6GvR8Qeq9G66c/YYFrrnpDN0IV4LpyrgurV4nMEybFWw5Z/43xBrDdq3RoR+mI+2d4u/+ac2XDTNAIaji5RcdrWkOzgfkWvg8uZbCfjoMdTKSnFVu2oywONgdpETP5eRopHELBqUgx875I3KQ9PKR8c5canA9Tv548HoTY43x+fRa5Zm19k0SQ9h6kL+Es1wxAgrE0NpNoYv4o509DOqRDysUQ8OoRlwwRo8zMj/hpCH1OjEB+UQV6H7u+nmkzU9UNQfPPgjAAw2Lu7kUCwHwyylfxroE2aOtfEP4EnnKkYCQveHzqzTLHjopOZRKNc9glOCnbZh7wVBfiONQCJxiP7i2gSYmVoIB61xaJDXnNwE74a14Wg2DiQt5kqB9RKGa/uGJn1RSzxgxr5ddtbvahe3rp4J0cfvQlESKrcxv21BbfquDqOwCPO6mKDlOCmmR0u4+8EXilZXqPSE8gSFM/xYhv6XbVUKGqBk="
       on:
           tags: true
+    - provider: releases
+      skip_cleanup: true
+      file_glob: true
+      file: "../*.deb"
+      tag_name: $TRAVIS_TAG
+      target_commitish: $TRAVIS_COMMIT
+      api_key:
+          secure: "kIDGS4LaqEvLgcA2VwUu/dViTPi4k4DWbpKt2+oLNFROFYLScF2v0hh+W1TZRJcgZUQSbQcZfkj6Wcqq1zbSewnlRG2r1JhAs4fq/StBfb14p1kw/BRv8OTYl7I38PEaMqZ0P3UvjSby0n1hIXgpTD6Hq2n8IQXqo9x3FY8WWOjTFXppar21cQG/jdXsOSiNn0xRMlJ6GvR8Qeq9G66c/YYFrrnpDN0IV4LpyrgurV4nMEybFWw5Z/43xBrDdq3RoR+mI+2d4u/+ac2XDTNAIaji5RcdrWkOzgfkWvg8uZbCfjoMdTKSnFVu2oywONgdpETP5eRopHELBqUgx875I3KQ9PKR8c5canA9Tv548HoTY43x+fRa5Zm19k0SQ9h6kL+Es1wxAgrE0NpNoYv4o509DOqRDysUQ8OoRlwwRo8zMj/hpCH1OjEB+UQV6H7u+nmkzU9UNQfPPgjAAw2Lu7kUCwHwyylfxroE2aOtfEP4EnnKkYCQveHzqzTLHjopOZRKNc9glOCnbZh7wVBfiONQCJxiP7i2gSYmVoIB61xaJDXnNwE74a14Wg2DiQt5kqB9RKGa/uGJn1RSzxgxr5ddtbvahe3rp4J0cfvQlESKrcxv21BbfquDqOwCPO6mKDlOCmmR0u4+8EXilZXqPSE8gSFM/xYhv6XbVUKGqBk="
+      on:
+          branch: master
+before_deploy:
+  if ! [[ $TRAVIS_TAG ]]; then
+    export TRAVIS_TAG="nightly.$TRAVIS_BUILD_NUMBER" &&
+    git config --local user.name "$USER_NAME" &&
+    git config --local user.email "$USER_EMAIL" &&
+    git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT";
+  fi
