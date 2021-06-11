@@ -6,7 +6,7 @@ before_install:
       -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
     - gpg --import 077CC9F2.gpg
 install:
-    - debuild '-k 077CC9F2'
+    - debuild '-k077CC9F2'
 deploy:
     - provider: releases
       skip_cleanup: true
