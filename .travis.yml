@@ -27,7 +27,7 @@ deploy:
           branch: master
 before_deploy:
   if ! [[ $TRAVIS_TAG ]]; then
-    export TRAVIS_TAG="nightly.$TRAVIS_BUILD_NUMBER" &&
+    export TRAVIS_TAG="nightly$TRAVIS_BUILD_NUMBER" &&
     git config --local user.name "$USER_NAME" &&
     git config --local user.email "$USER_EMAIL" &&
     git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT";
