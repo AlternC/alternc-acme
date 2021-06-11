@@ -2,8 +2,7 @@ language : bash
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
-    - openssl aes-256-cbc -K $encrypted_c73435edf6b8_key -iv $encrypted_c73435edf6b8_iv
-      -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
+    - openssl aes-256-cbc -K $encrypted_2155243bff9e_key -iv $encrypted_2155243bff9e_iv -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
     - gpg --import 077CC9F2.gpg
 install:
     - debuild '-k077CC9F2'
