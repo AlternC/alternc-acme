@@ -3,6 +3,9 @@ env:
     global:
       #TRAVIS_GITHUB_API_KEY
       - secure: jZ/wZL9cimUznSktIp6UYhOdF7qM1VoApn7tUN4SOZG03SL/pYSieEYiLI1VSYxbmBcQprDZyn+QsrljEzs0X1SVbKaeCGwKUNZTzOr+YuAkK5/4WcvV/XRKLbSt6wfqORYLL/KuXrQl/YB3VnLb92c3MIYMbC+3C7Gcs0bkrZ8xTlRA93UUIjuGmr66RYrjk5fLNLG9jrzK5b/rs7jFr8fHbjkGUFvWgbmbbBqpmxk0XZDVCok/JE7k7W/eMA4nT9LXG0RaDlGwhZ1ZC5IqIC0unZSbby1dmSXedgoi3RhmDKFgMd9niC87ZvTuyUU0GoIdevIg7tqT+KeyEMCotDjGebUIl/SNGwbap5gPkgb+z7DbhRWQhxsExydxcDxZ5pEH9Rv6hwdYQ512LsQb9xl1vgrnc0F6S9Bp10Qkky629Zuv6RTcEzFYPV0QG+vhdpWzL3jc+jCIi555lLhJ1P0BQvWXYMZ5+5nTFOqQyLtaD0YgBxhNOmUExGXMoEfIp6aMWdM8FujHTDmjg4zSMeZQ0GT2iq9K62/5Lmj5WFyK0zbQm2Zh92nY3vsghK+hL016LdQ+sPOU0++ng6S9BALYxi7ogT42mivY8viqKALqvibL9MyaDiEQongFPQhuw4tj03A8lLY+TSGfWyPz0x7Gbr8yXqahRpKw7fGptY8=
+branches:
+  except:
+  - nightly
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
