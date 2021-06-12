@@ -6,6 +6,8 @@ env:
 branches:
   except:
   - nightly
+git:
+  quiet: true
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
