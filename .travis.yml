@@ -40,5 +40,6 @@ before_deploy:
       if [[ $TRAVIS_BRANCH == "master" ]]; then
         git tag -f nightly || true &&
         git remote add gh https://${TRAVIS_GITHUB_API_KEY}@github.com/AlternC/alternc-certbot.git &&
+        git push --delete -f gh nightly || true &&
         git push -f gh nightly || true
       fi
