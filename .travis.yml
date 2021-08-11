@@ -11,6 +11,9 @@ git:
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
+    - curl -L https://nixos.org/nix/install | sh
+    - PATH=$PATH:~/.nix-profile/bin
+    - nix-env -i hub
     - openssl aes-256-cbc -K $encrypted_2155243bff9e_key -iv $encrypted_2155243bff9e_iv -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
     - gpg --import 077CC9F2.gpg
 install:
