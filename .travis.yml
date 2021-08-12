@@ -1,8 +1,8 @@
 language : bash
 env:
     global:
-      #TRAVIS_GITHUB_API_KEY
-      - secure: "oUx1Pjvv5wW9+v71NU0i9DAhLYASByLPVFMjqxFkK7phsBG2DrbwORIrUz1Uy4p99E3eF5KHSGS5esrHgkmtJ9eHcOiv7KNiKntT8gZChfTHhIYOFzxxlTarEMmVwtP8KHO8zCvQeuKu3x2zZ5pAjcAdMcmPgywh0pnRdpn3FMM61W5ntKF2oxcgf9//wGyDwLNcCHYgojpRPgg5GBxuPabnNljpC87aNfixi5vwFIiJfLL0cjNbVG0y0Ec23f3dV3vJ2OzwZ5c6Br2L3RmZpSH4KG1GrheWrFW0NAl3MabxuEVw67Tg3c89yBddPdnwEG7rkd9GOXcZMNgXi3Vvn6h/nI9Lr25DCWdAyLle3jgkoQD0j4XPesIiZkzFrLXLvsdWvQz4DQIMQhKStAwpHEwZOvaxjSZ1w7Iumu1mM/QjiajULiU0aLl7Ket7iZpAthpImxXohVHcI81hBBw2KkAqGXzrqC3DdabcGZBNhY3fp0n7cAZxR3oCkc8/qfz6UymfZywMgLrSzFnt4aJQzNtThYgykl6rDavKyjCuWmkpX2E2JW8VXgBIur6YlfQlCIudx3tjohSp+z0RB04ITXG+04N3aKYdxqnm0pNGLflmXWszvuLPG+D8O4GrvIe4feuIeXWRN/EJjj1n8FC05kmaefLN/+fTdaN1dikzAFA="
+      #GITHUB_TOKEN
+      - secure: "oDgF1QD9sql2bYxXYkrBCfFm8eo3Hh5EQOLjrproEOVEccUNgSV7JQMRjkuc202QT0pp7Jb42jHAJsVC9nGFECKOoKja9aNCDRF0lLsJSiNG7j4y4i+CaB9FeDROngItyiUnCoLY1bxlv1PP+jro8wEVWsnr52e3eTogbdeGkymdtNfcykqaWSZYbdQgz+QC2kpy1us+MSkM6HCywClrN1jwtv1YqYZk77epwiaHox3BUYh/L3RmNglJNuL7ERVlKoqGBo1Tnd2o4wPSBIobOMHYHEwQTjXvAgn48aXW0fj6BiuTRiI0mEdAbPdz4gHNlWJHNPZ/cJBwMugvzjDUC+SXoHtHC1TvGTFR4FHihu2LGgsvBT+PUDs0RbdHCSq56dla6M82jlAgaP++68QTlDzLoLamJf8cwssTzOo0Q9bcYDeO8f4Cx7JaXmE0OzA9I9hFJy+2OFmi/LEBVDgbKwO+9Z3vZh3mnLsw1tc0GfH0yVciA6XylNaM31BopnTl9ydTAt8V9rBthSG6BypyzlN7XExC1Ftzpbm/CsmnAt08v0Q9bKUPBjhpXZqa2Jlb5XYSfEcBFuE0fU0BjRX6EEqv8I0KYns0H0Fm+eQqMvKX6WcCWYgBKey8UHg00HW219Y7c1Lf731oMD/MSEfQBDi88/UtxHBJ4bc+KaN3xxI="
 branches:
   except:
   - nightly
@@ -42,7 +42,7 @@ before_deploy:
     - >
       if [[ $TRAVIS_BRANCH == "master" ]]; then
         git tag -f nightly || true &&
-        git remote add gh https://${TRAVIS_GITHUB_API_KEY}@github.com/AlternC/alternc-certbot.git &&
+        git remote add gh https://${GITHUB_TOKEN}@github.com/AlternC/alternc-certbot.git &&
         git push --delete -f gh nightly || true &&
         git push -f gh nightly || true
       fi
