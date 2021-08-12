@@ -35,6 +35,7 @@ deploy:
       file: "../*.deb"
       tag_name: "nightly"
       prerelease: true
+      name: Automatic nightly build by Travis on $(date +'%F %T %Z').
       target_commitish: $TRAVIS_COMMIT
       api_key:
           secure: "V6cz6M5pcnMesO1VibEF+SoQq2MbW8sJM+4NzmvhWZX1miCmvFaOlYNQN6GW0Dxzr2oPp5pn3CP6pyO0dojI7kWQQCR5smawlz4x9pBe0C3JVA9+BAj+oJj1/TNAbsMirvxwGsNikNsL5X66Eyej3BqnAE6rCrWokfNLgPaghk8kWkcQ1wb08qYtoTu+suZZEG1pu+ct58PvXLZh5mS0J7gag4o9k3egyA/EHJdcK94i5Xh9PSBxE+TF4AY6wM+Sp5a+xmzY1D9LtW8dbEI9f4usLOLFDr3SSvr3C9mQ1Dbg7TUAEMYurj3eElGEJetoHcfeLwitmv4yp5NCS4JOis8PeV6iz84G+3xmj7RZnPW9GetAavNB3vfna/Q7bxPgY4aU4M2PElFbQvAmUuZBPGj3RQVTE6ik0Xs9pbVelN4WNZAiQag7dAek6iUj4I02TbVbQWYERMsze1OEAUPxnGB50o/WJTzQqGRhIGF7BDvfe2UBaV0myr5GtrULD6MtxiYLHc/GWEZhxq1qMLadJuZVSfDkQ8el1FgftUk8Cx8nM8WDdGuiiYr94jj1Hsh92P7PGgReTadKcQqIsB9PTBoTodgAkEfGH6hIswNIkfsOBizrh5qZTRDFBjxUOHuACqSWH3k6mt1lqDSEh5hNASoVsMSeHH+S+tOL9yPtVFw="
