@@ -11,11 +11,10 @@ branches:
 git:
   quiet: true
 before_install:
+    - curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
     - sudo apt-get -qq update
-    - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
-    - curl -L https://nixos.org/nix/install | sh
-    - PATH=$PATH:~/.nix-profile/bin
-    - nix-env -i hub
+    - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf gh
     - openssl aes-256-cbc -K $encrypted_2155243bff9e_key -iv $encrypted_2155243bff9e_iv -in 077CC9F2.gpg.enc -out 077CC9F2.gpg -d
     - gpg --import 077CC9F2.gpg
 install:
@@ -44,7 +43,7 @@ deploy:
 before_deploy:
     - >
       if [[ $TRAVIS_BRANCH == "master" ]]; then
-        hub release delete nightly
+        gh release delete nightly -R ${GITHUB_REPOSITORY} -y
         git tag -f nightly || true &&
         git remote add gh https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git &&
         git push --delete -f gh nightly || true &&
