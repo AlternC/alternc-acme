@@ -9,13 +9,14 @@
 export DH_VERBOSE=1
 
 #Define version packaging
-VERSION=$(shell git tag -l --points-at HEAD)
+#Exclude nighly version
+VERSION=$(shell git tag -l --points-at HEAD |grep -v 'nightly')
 ifeq ($(strip $(VERSION)),)
-	VERSION=$(shell git describe --tags --abbrev=0)
+	VERSION=$(shell git tag | sort -V |grep -v nightly|tail -1)
 	ifeq ($(strip $(VERSION)),)
 		export VERSION="0.0.0"
 	endif
-	VERSION:=$(VERSION)-$(shell date +'%y%m%d%H%M%S')
+	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
 endif
 
 clean:
