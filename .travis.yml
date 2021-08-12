@@ -45,7 +45,7 @@ before_deploy:
       if [[ $TRAVIS_BRANCH == "master" ]]; then
         hub release delete nightly
         git tag -f nightly || true &&
-        git remote add gh https://${GITHUB_TOKEN}@github.com/AlternC/alternc-certbot.git &&
+        git remote add gh https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git &&
         git push --delete -f gh nightly || true &&
         git push -f gh nightly || true
       fi
