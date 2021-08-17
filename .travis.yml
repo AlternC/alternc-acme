@@ -2,7 +2,6 @@ language : bash
 env:
     global:
       - HUB_PROTOCOL=https
-      - GITHUB_REPOSITORY="AlternC/alternc-certbot"
       #GITHUB_TOKEN
       - secure: "oDgF1QD9sql2bYxXYkrBCfFm8eo3Hh5EQOLjrproEOVEccUNgSV7JQMRjkuc202QT0pp7Jb42jHAJsVC9nGFECKOoKja9aNCDRF0lLsJSiNG7j4y4i+CaB9FeDROngItyiUnCoLY1bxlv1PP+jro8wEVWsnr52e3eTogbdeGkymdtNfcykqaWSZYbdQgz+QC2kpy1us+MSkM6HCywClrN1jwtv1YqYZk77epwiaHox3BUYh/L3RmNglJNuL7ERVlKoqGBo1Tnd2o4wPSBIobOMHYHEwQTjXvAgn48aXW0fj6BiuTRiI0mEdAbPdz4gHNlWJHNPZ/cJBwMugvzjDUC+SXoHtHC1TvGTFR4FHihu2LGgsvBT+PUDs0RbdHCSq56dla6M82jlAgaP++68QTlDzLoLamJf8cwssTzOo0Q9bcYDeO8f4Cx7JaXmE0OzA9I9hFJy+2OFmi/LEBVDgbKwO+9Z3vZh3mnLsw1tc0GfH0yVciA6XylNaM31BopnTl9ydTAt8V9rBthSG6BypyzlN7XExC1Ftzpbm/CsmnAt08v0Q9bKUPBjhpXZqa2Jlb5XYSfEcBFuE0fU0BjRX6EEqv8I0KYns0H0Fm+eQqMvKX6WcCWYgBKey8UHg00HW219Y7c1Lf731oMD/MSEfQBDi88/UtxHBJ4bc+KaN3xxI="
 branches:
@@ -43,9 +42,9 @@ deploy:
 before_deploy:
     - >
       if [[ $TRAVIS_BRANCH == "master" ]]; then
-        gh release delete nightly -R ${GITHUB_REPOSITORY} -y
+        gh release delete nightly -R ${TRAVIS_REPO_SLUG} -y
         git tag -f nightly || true &&
-        git remote add gh https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git &&
+        git remote add gh https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git &&
         git push --delete -f gh nightly || true &&
         git push -f gh nightly || true
       fi
