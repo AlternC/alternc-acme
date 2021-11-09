@@ -54,7 +54,8 @@ class m_acme
 
         $output = array();
         $return_var = -1;
-        exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/acme/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
+        $arg = "--agree-tos --non-interactive --webroot -w /var/lib/acme/";
+        exec("certbot ".$arg." certonly -d ".$fqdn." 2>&1", $output, $return_var);
 
         // Add certificate to panel
         if ($return_var == 0) {
