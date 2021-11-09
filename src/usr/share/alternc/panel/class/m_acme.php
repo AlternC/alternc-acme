@@ -47,7 +47,7 @@ class m_acme
      * @return integer the ID of the newly created certificate in the table
      * or false if an error occurred
      */
-    public function import($fqdn)
+    public function import($fqdn,$force)
     {
         global $cuid, $msg, $ssl;
         $msg->log("acme", "import","$fqdn");
@@ -55,6 +55,9 @@ class m_acme
         $output = array();
         $return_var = -1;
         $arg = "--agree-tos --non-interactive --webroot -w /var/lib/acme/";
+        if ($force) {
+            $arg.=" --force-renewal";
+        }
         exec("certbot ".$arg." certonly -d ".$fqdn." 2>&1", $output, $return_var);
 
         // Add certificate to panel
