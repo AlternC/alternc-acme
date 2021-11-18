@@ -1,4 +1,4 @@
-alternc-certificate-provider-letsencrypt (0.0.15) stable; urgency=low
+alternc-acme (0.0.15) stable; urgency=low
 
   * initial AlternC Certificate provider for AlternC 3.5 for Jessie & Stretch
 

@@ -12,7 +12,7 @@ if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $db->query('select id, compte from domaines where domaine = ?',
                array($domain_name));
     if (!$db->next_record()) {
-        $err->log('certbot', 'reload.d - dns_reload_z<one - Unable to find domain information for ' . $domain_name);
+        $err->log('acme', 'reload.d - dns_reload_z<one - Unable to find domain information for ' . $domain_name);
         exit -1;
     }
     $mem->su($db->f('compte'));
@@ -20,7 +20,7 @@ if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
     $dom->lock();
     $domains = $dom->get_domain_all($domain_name);
     $sub_domains = array();
-    $certbot->import($domain_name);
+    $acme->import($domain_name);
     // Build a list of fqdns to import, excluding dns only entries.
     // This reduces repeat calls to import for duplicate sub domains.
     foreach ($domains['sub'] as $index => $sub_domain) {
@@ -33,7 +33,7 @@ if ($argv[1] == "dns_reload_zone" && !empty($argv[2])) {
         }
     }
     foreach ($sub_domains as $fqdn) {
-        $certbot->import($fqdn);
+        $acme->import($fqdn);
     }
     $dom->unlock();
     $mem->unsu();

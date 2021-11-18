@@ -1,4 +1,4 @@
-Source: alternc-certificate-provider-letsencrypt
+Source: alternc-acme
 Section: admin
 Priority: optional
 Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9),
                git
 Standards-Version: 3.9.8
 
-Package: alternc-certificate-provider-letsencrypt
+Package: alternc-acme
 Architecture: all
 Depends: apt-utils,
        , php-cli
@@ -16,9 +16,9 @@ Depends: apt-utils,
        , certbot
        , python-certbot-apache
        , ${misc:Depends}
-Conflicts: alternc-certbot
+Conflicts: alternc-certbot , alternc-certificate-provider-letsencrypt
 Provides: alternc-certificate-provider
-Description: Letsencrypt certificate plugin for AlternC
+Description: Acme certificate plugin for AlternC
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
