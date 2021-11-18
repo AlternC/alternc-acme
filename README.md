@@ -74,7 +74,8 @@ dpkg-buildpackage -us -uc -b
 * [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
 * [x] Stop old debian support
 * [x] Renaming project to follow AlternC recommandation (since 3.5.x)
-* [x] Change packaging system, move to debuild solution (0.0.15)
+* ~~[x] Change packaging system, move to debuild solution (0.0.15)~~
+* [x] Change packaging system, move to debuild solution (0.0.16)
 * [ ] push into official AlternC repository
 
 
