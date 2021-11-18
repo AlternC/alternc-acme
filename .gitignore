@@ -1,5 +1,6 @@
 debian/*.debhelper.log
 debian/*.substvars
+debian/alternc-acme
 debian/alternc-certificate-provider-letsencrypt
 debian/files
 debian/.debhelper

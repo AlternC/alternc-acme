@@ -16,7 +16,9 @@ Depends: apt-utils,
        , certbot
        , python-certbot-apache
        , ${misc:Depends}
-Conflicts: alternc-certbot , alternc-certificate-provider-letsencrypt
+Conflicts: alternc-certbot
+Replaces: alternc-certificate-provider-letsencrypt (<< 0.0.15)
+Breaks: alternc-certificate-provider-letsencrypt (<< 0.0.15)
 Provides: alternc-certificate-provider
 Description: Acme certificate plugin for AlternC
  AlternC is a mutualized hosting software manager for Linux.
