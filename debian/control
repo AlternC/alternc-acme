@@ -31,3 +31,11 @@ Description: Acme certificate plugin for AlternC
  .
  More information at https://alternc.com/
 Homepage: https://alternc.com/
+
+Package: alternc-certificate-provider-letsencrypt
+Depends: alternc-acme, ${misc:Depends}
+Architecture: all
+Priority: optional
+Section: oldlibs
+Description: transitional package
+ This is a transitional package. It can safely be removed.
