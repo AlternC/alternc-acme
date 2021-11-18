@@ -1,4 +1,4 @@
-Source: alternc-certificate-provider-letsencrypt
+Source: alternc-acme
 Section: admin
 Priority: optional
 Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9),
                git
 Standards-Version: 3.9.8
 
-Package: alternc-certificate-provider-letsencrypt
+Package: alternc-acme
 Architecture: all
 Depends: apt-utils,
        , php-cli

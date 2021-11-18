@@ -1,7 +1,7 @@
 
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: alternc-certificate-provider-letsencrypt
-Source: https://github.com/AlternC/alternc-certbot
+Upstream-Name: alternc-acme
+Source: https://github.com/AlternC/alternc-acme
 
 Files: *
 Copyright: Copyright 2015-2017 AlternC's development Team <team@alternc.org>
