@@ -17,6 +17,8 @@ Depends: apt-utils,
        , python-certbot-apache
        , ${misc:Depends}
 Conflicts: alternc-certbot
+Replaces: alternc-certificate-provider-letsencrypt (<< 0.0.17~)
+Breaks: alternc-certificate-provider-letsencrypt (<< 0.0.16~)
 Provides: alternc-certificate-provider
 Description: Letsencrypt certificate plugin for AlternC
  AlternC is a mutualized hosting software manager for Linux.
@@ -29,3 +31,11 @@ Description: Letsencrypt certificate plugin for AlternC
  .
  More information at https://alternc.com/
 Homepage: https://alternc.com/
+
+Package: alternc-certificate-provider-letsencrypt
+Depends: alternc-acme, ${misc:Depends}
+Architecture: all
+Priority: optional
+Section: oldlibs
+Description: transitional package
+ This is a transitional package. It can safely be removed.
