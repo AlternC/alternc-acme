@@ -40,6 +40,7 @@ deploy:
       on:
           branch: master
           tags: true
+          
 before_deploy:
     - >
       if [[ $TRAVIS_BRANCH == "master" ]]; then
