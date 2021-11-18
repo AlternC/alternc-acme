@@ -1,3 +1,35 @@
+alternc-certificate-provider-letsencrypt (0.0.16) stable; urgency=low
+
+  * Correct packaging system
+    * 0.0.15 was always done with fpm and not debuild
+  * Use travis to build pacakge
+    * Package is build on each tag push
+    * Nightly package is done on each master commit
+  * Provide package on github
+    * bintray service is removed
+  * Renew only outdated or missing certificates
+  * Add option to manage specific certificates group
+  * Better support certbot (acme protocol)
+
+  Solves :
+    * #72 #71 : Provide nightly build
+    * #69 #65 : Finalize 0.0.15 and remove fpm for debuild
+    * #67 #66 : Bintray service is removed
+    * #54 #53 : Fix typo
+    * #50 #48 : Fix php error
+    * #50 #43 : Add an option to generate specific certificate (system, user, all)
+    * #46 #45 : Use acme-v02 and acme-v01
+    * #36 #23 : Fix php notice
+    * #38 #37 : be silent if all done , add erbosity mode
+    * #40 #39 : generate system certficate before user domains
+    * #42 #41 : restore missing file by #30
+    * #33     : Fix php warning
+    * #26     : add missing build dependencies
+    * #25 #24 : clean some files during build
+    * #30 #29 : generate cert on sub domain
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 18 Jun 2021 17:26:00 +0200
+
 alternc-certificate-provider-letsencrypt (0.0.15) stable; urgency=low
 
   * initial AlternC Certificate provider for AlternC 3.5 for Jessie & Stretch
