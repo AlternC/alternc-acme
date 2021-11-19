@@ -17,14 +17,16 @@ ifeq ($(strip $(VERSION)),)
 		export VERSION="0.0.0"
 	endif
 	VERSION:=$(VERSION)+$(shell date +'%y%m%d%H%M%S')
+	IS_NIGHTLY=1
 endif
 
 clean:
 	dh clean
 	rm -f debian/files
 	(git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
+ifeq ($(strip $(IS_NIGHTLY)),1)
 	(git rev-parse --git-dir > /dev/null 2>&1 && dch -m -b -v $(VERSION) autobuild) || true
-
+endif
 %:
 	dh $@
 
