@@ -1,4 +1,4 @@
-alternc-certificate-provider-letsencrypt (0.0.16) stable; urgency=low
+alternc-acme (0.0.16) stable; urgency=low
 
   * Correct packaging system
     * 0.0.15 was always done with fpm and not debuild
@@ -30,7 +30,7 @@ alternc-certificate-provider-letsencrypt (0.0.16) stable; urgency=low
 
  -- Camille Lafitte <alternc@webelys.com>  Tue, 18 Jun 2021 17:26:00 +0200
 
-alternc-certificate-provider-letsencrypt (0.0.15) stable; urgency=low
+alternc-acme (0.0.15) stable; urgency=low
 
   * initial AlternC Certificate provider for AlternC 3.5 for Jessie & Stretch
 
