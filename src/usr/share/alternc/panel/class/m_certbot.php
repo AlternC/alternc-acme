@@ -73,17 +73,20 @@ class m_certbot
     
     // -----------------------------------------------------------------
     /**
-    * Checks if dig returns our L_PUBLIC_IP
-    */
+     * Prefer an acme test 
+     * With dig +trace we can't follow cdn/proxy and some other use case
+     * Workaround is to use --dry-run mode, we increase rate limit and could manage more certficate generation
+     * https://letsencrypt.org/docs/staging-environment/
+     */
     public function isLocalAlterncDomain($fqdn)
     {
-        global $L_PUBLIC_IP;
-        $out=array();
-        exec("dig A +trace ".escapeshellarg($fqdn), $out);
-        foreach ($out as $line) {
-            if (preg_match('#.*IN.A.*?([0-9\.]*)$#', $line, $mat) && $mat[1] == $L_PUBLIC_IP) {
+        $output = array();
+        $return_var = -1;
+        exec("certbot --dry-run --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
+
+        // Dry run was successful
+        if ($return_var == 0) {
                 return true;
-            }
         }
         return false;
     }
