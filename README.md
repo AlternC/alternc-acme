@@ -12,7 +12,7 @@ We check that the DNS is answering with our PUBLIC_IP before asking Letsencrypt
 You'll need :
 * a Debian server (from Jessie)
 * AlternC >= 3.5
-* The Certbot package
+* The acme package
  * with Jessie : [from backports](https://packages.debian.org/jessie-backports/certbot)
  * with Stretch : [from stable](https://packages.debian.org/stretch/certbot) or [from backports](https://packages.debian.org/stretch-backports/certbot) for wildcards
 
@@ -31,12 +31,12 @@ No more supported (last compatible version is 0.0.14)
 
 ### On Jessie or Stretch
 
-Go to https://github.com/AlternC/alternc-certbot/releases and download last *.deb release.
+Go to https://github.com/AlternC/alternc-acme/releases and download last *.deb release.
 
 ```shell
 apt-get update
 apt-get install -t jessie-backports certbot
-dpkg -i alternc-certbot*.deb
+dpkg -i alternc-acme*.deb
 alternc.install
 ```
 
@@ -49,7 +49,7 @@ We no more propose nightly package. You must package it yourself
 Once alternc-certificate-provider-letsencrypt is installed, you must:
 * run **alternc.install**
 
-You can run also **/usr/lib/alternc/generate_certbot.php** to get faster certificate to all domains hosted.
+You can run also **/usr/lib/alternc/generate_acme.php** to get faster certificate to all domains hosted.
 
 # Packaging from source
 
@@ -57,7 +57,7 @@ To generate package we use either debuild / dpkg-buildpackage
 
 ```shell
 apt-get build-essential
-git clone https://github.com/AlternC/alternc-certbot
+git clone https://github.com/AlternC/alternc-acme
 dpkg-buildpackage -us -uc -b
 ```
 

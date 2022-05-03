@@ -16,7 +16,7 @@ then
     fi
 fi
 
-# By default generate_certbot.php should be verbose, any caller may pass
+# By default generate_acme.php should be verbose, any caller may pass
 # --quiet to disable verbose output.
 VERBOSE='--verbose'
 if [[ " $@ " =~ " --quiet " ]] ; then
