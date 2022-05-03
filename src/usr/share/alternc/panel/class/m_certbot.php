@@ -54,7 +54,7 @@ class m_certbot
 
         $output = array();
         $return_var = -1;
-        exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
+        exec("certbot --agree-tos --non-interactive --webroot -w /var/lib/acme/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
 
         // Add certificate to panel
         if ($return_var == 0) {
@@ -82,7 +82,7 @@ class m_certbot
     {
         $output = array();
         $return_var = -1;
-        exec("certbot --dry-run --non-interactive --webroot -w /var/lib/letsencrypt/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
+        exec("certbot --dry-run --non-interactive --webroot -w /var/lib/acme/ certonly -d ".$fqdn." 2>&1", $output, $return_var);
 
         // Dry run was successful
         if ($return_var == 0) {
