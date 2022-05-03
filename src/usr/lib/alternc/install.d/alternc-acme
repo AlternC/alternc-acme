@@ -38,5 +38,5 @@ fi
 if [ "$1" == "apache2" ]; then
 
     ##Generate let's encrypt certificate
-    ALTERNC_REQUEST_CERTIFICATES="$ALTERNC_REQUEST_CERTIFICATES" /usr/lib/alternc/generate_certbot.php "$VERBOSE" "$CERTS"
+    ALTERNC_REQUEST_CERTIFICATES="$ALTERNC_REQUEST_CERTIFICATES" /usr/lib/alternc/generate_acme.php "$VERBOSE" "$CERTS"
 fi

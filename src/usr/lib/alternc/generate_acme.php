@@ -78,12 +78,12 @@ $spacer="                                                                       
 if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'system') {
     foreach($ssl->get_fqdn_specials() as $specialfqdn) {
         vprint( _("\r$spacer\rRequesting domain %s"), array( $specialfqdn ));
-        if( ! $certbot->isLocalAlterncDomain( $specialfqdn ) ){
+        if( ! $acme->isLocalAlterncDomain( $specialfqdn ) ){
             continue;
         }
-        vprint( _(" hosted locally, running certbot..."), array( ));
+        vprint( _(" hosted locally, running acme..."), array( ));
 
-        $certbot->import($specialfqdn);
+        $acme->import($specialfqdn);
     }
     vprintf(_("\rFinished renewal for system certificates\n"), array());
 }
@@ -123,7 +123,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
     // Need to request anything:
     if(  count( $domainsList ) ){
 
-        vprint( _("Requiring Certbot renewal for %s domains\n"), count( $domainsList ));
+        vprint( _("Requiring acme renewal for %s domains\n"), count( $domainsList ));
         foreach ($domainsList as $key => $sub_domain) {
             $mem->su($sub_domain["cuid"]);
             // Check if we already have a valid cert for this domain (valid for more than $VALID_DAYS days
@@ -150,19 +150,19 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
 
             // not found or invalid or expired soon, let's get one:
             vprint( _("\r$spacer\rRequesting domain %d/%d: %s"), array( $key + 1, count( $domainsList),$sub_domain["sub_domain"]["fqdn"] )); 
-            if( ! $certbot->isLocalAlterncDomain( $sub_domain["sub_domain"]["fqdn"] ) ){
+            if( ! $acme->isLocalAlterncDomain( $sub_domain["sub_domain"]["fqdn"] ) ){
                 continue;
             }
-            vprint( _(" hosted locally, running certbot..."), array( ));
-            $certbot->import($sub_domain["sub_domain"]["fqdn"]);
+            vprint( _(" hosted locally, running acme..."), array( ));
+            $acme->import($sub_domain["sub_domain"]["fqdn"]);
         }
-        vprint( _("\nFinished Certbot renewal for non-system certificates"), count( $domainsList ));
+        vprint( _("\nFinished acme renewal for non-system certificates"), count( $domainsList ));
     } else {
-        vprint( _("\nNo standard Certbot renewal for non-system-certificates"), count( $domainsList ));
+        vprint( _("\nNo standard acme renewal for non-system-certificates"), count( $domainsList ));
     }
 }
 else {
     vprint(_("Skipping non-system certificates, requested certificates type: %s"), array($REQUEST_CERTS));
 }
 
-vprint( _("\nFinished Certbot renewal\n"), array());
+vprint( _("\nFinished acme renewal\n"), array());

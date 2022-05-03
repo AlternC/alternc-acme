@@ -13,16 +13,16 @@ case "$1" in
 
 		if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
 			#Jessie, Stretch
-			ln -sf /etc/alternc/alternc-certbot.conf /etc/apache2/conf-available/alternc-certbot.conf
+			ln -sf /etc/alternc/alternc-acme.conf /etc/apache2/conf-available/alternc-acme.conf
 			. /usr/share/apache2/apache2-maintscript-helper
-			apache2_invoke enconf alternc-certbot > /dev/null 2>&1 || true
+			apache2_invoke enconf alternc-acme > /dev/null 2>&1 || true
 		else
 			#Wheezy
-			ln -s /etc/alternc/alternc-certbot.conf /etc/apache2/conf.d/alternc-certbot.conf
+			ln -s /etc/alternc/alternc-acme.conf /etc/apache2/conf.d/alternc-acme.conf
 			invoke-rc.d apache2 force-reload > /dev/null 2>&1 || true
 		fi
 
-		chmod 744 /etc/cron.d/alternc-certbot
+		chmod 744 /etc/cron.d/alternc-acme
 
 		echo -e "\033[31m**********************************************"
 	    echo "*                                            *"

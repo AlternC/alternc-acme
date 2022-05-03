@@ -29,14 +29,14 @@
 /**
  * TLS Certificates management class
  */
-class m_certbot
+class m_acme
 {
 
     // -----------------------------------------------------------------
     /**
      * Constructor
      */
-    public function m_certbot()
+    public function m_acme()
     {
     }
 
@@ -50,7 +50,7 @@ class m_certbot
     public function import($fqdn)
     {
         global $cuid, $msg, $ssl;
-        $msg->log("certbot", "import","$fqdn");
+        $msg->log("acme", "import","$fqdn");
 
         $output = array();
         $return_var = -1;
@@ -61,12 +61,12 @@ class m_certbot
             $key = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/privkey.pem');
             $crt = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/cert.pem');
             $chain = file_get_contents('/etc/letsencrypt/live/'.$fqdn.'/chain.pem');
-            $msg->log("certbot", "import","new cert $fqdn OK");
+            $msg->log("acme", "import","new cert $fqdn OK");
 
             return $ssl->import_cert($key, $crt, $chain, "letsencrypt");
         }
         // Or log the error:
-        $msg->log("certbot", "import","import failed, log is ".implode("\n        ",$output));
+        $msg->log("acme", "import","import failed, log is ".implode("\n        ",$output));
         return false;
     }
 
@@ -92,4 +92,4 @@ class m_certbot
     }
 }
 
-/* Class m_certbot */
+/* Class m_acme */
