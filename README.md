@@ -74,9 +74,10 @@ dpkg-buildpackage -us -uc -b
 * [x] More verbose on alternc.install process as certificates generation can took some times (0.0.14)
 * [x] Stop old debian support
 * [x] Renaming project to follow AlternC recommandation (since 3.5.x)
-* ~~[x] Change packaging system, move to debuild solution (0.0.15)~~
+* [x] Change packaging system, move to debuild solution (0.0.15)
 * [x] Change packaging system, move to debuild solution (0.0.16)
 * [x] Rename project to alternc-acme (0.0.17)
+* [x] Fix 0.0.17 , support forward mode, rename file to acme (0.0.18)
 * [ ] push into official AlternC repository
 
 

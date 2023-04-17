@@ -1,3 +1,11 @@
+alternc-acme (0.0.18) stable; urgency=low
+
+  * Clean old certbot reference
+  * Build package with travis credential
+  * Support forward mode to catch proxy frontal service
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed, 19 Apr 2023 10:00:00 +0200
+
 alternc-acme (0.0.17) stable; urgency=low
 
   * Rename project to alternc-plugin
