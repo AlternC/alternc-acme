@@ -7,6 +7,10 @@ set -e
 case "$1" in
 	configure)
 
+		if [ -f /etc/apache2/conf-enabled/alternc-certbot.conf ]; then
+			rm /etc/apache2/conf-enabled/alternc-certbot.conf
+		fi
+
 		if [ -f /etc/apache2/conf.d/alternc-certbot.conf ]; then
 			rm /etc/apache2/conf.d/alternc-certbot.conf
 		fi
