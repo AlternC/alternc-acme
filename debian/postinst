@@ -7,13 +7,13 @@ set -e
 case "$1" in
 	configure)
 
-		if [ -f /etc/apache2/conf-enabled/alternc-certbot.conf ]; then
-			rm /etc/apache2/conf-enabled/alternc-certbot.conf
-		fi
-
-		if [ -f /etc/apache2/conf.d/alternc-certbot.conf ]; then
-			rm /etc/apache2/conf.d/alternc-certbot.conf
-		fi
+		##Remove old certbot files (could be forgotten after package naming change)
+		rm -f /etc/alternc/alternc-certbot.conf
+		rm -f /etc/apache2/conf-enabled/alternc-certbot.conf
+		rm -f /etc/apache2/conf-available/alternc-certbot.conf
+		rm -f /etc/apache2/conf.d/alternc-certbot.conf
+		rm -f /etc/cron.d/alternc-certbot
+		rm -f /usr/lib/alternc/install.d/alternc-certbot	
 
 		if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
 			#Jessie, Stretch
