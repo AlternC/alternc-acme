@@ -47,7 +47,7 @@ class m_acme
      * @return integer the ID of the newly created certificate in the table
      * or false if an error occurred
      */
-    public function import($fqdn,$force)
+    public function import($fqdn,$force = false)
     {
         global $cuid, $msg, $ssl;
         $msg->log("acme", "import","$fqdn");
