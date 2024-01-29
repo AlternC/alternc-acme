@@ -1,3 +1,13 @@
+alternc-acme (0.0.19) stretch buster; urgency=low
+
+  * Set explicit distribution compatibily
+  * quiet mode must be a quiet mode, cron are now quiet
+  * Continue to clean old certbot package reference
+  * Enable force mode
+
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed, 29 Jan 2024 07:57:00 +0200
+
 alternc-acme (0.0.18) stable; urgency=low
 
   * Clean old certbot reference
