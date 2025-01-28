@@ -14,7 +14,7 @@ Depends: apt-utils,
        , debconf
        , alternc (>= 3.5.0~rc1),
        , certbot
-       , python-certbot-apache
+       , python3-certbot-apache | python-certbot-apache
        , ${misc:Depends}
 Conflicts: alternc-certbot
 Replaces: alternc-certificate-provider-letsencrypt (<< 0.0.17~)
