@@ -1,3 +1,10 @@
+alternc-acme (0.1.0) buster bullseye bookworm; urgency=low
+
+  * Stop suppport before buster
+  * Follow AlternC 3.5 support and recent Debian
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 17 Apri 2025 08:50:00 +0200
+
 alternc-acme (0.0.19) stretch buster; urgency=low
 
   * Set explicit distribution compatibily
