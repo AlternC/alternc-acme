@@ -73,6 +73,8 @@ foreach($types as $type=>$data) {
 }
 
 $spacer="                                                                                 ";
+$domainsList = array();
+
 
 // Request system domains before user certificates.
 if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'system') {
@@ -97,7 +99,6 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
 
     // Retrieve every information of every subdomains from user accounts
     // (only those for which only_dns is false (they have vhosts)
-    $domainsList = array();
     foreach ($accounts as $cuid => $infos) {
         $mem->su($cuid);
         // Get all domain set to each user
