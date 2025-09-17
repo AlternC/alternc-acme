@@ -45,7 +45,7 @@ $verbose = (in_array('v', array_keys($options)) || in_array('verbose', array_key
 $REQUEST_CERTS= in_array('certificates', array_keys($options)) ? $options['certificates'] : (
     in_array('c', array_keys($options)) ? $options['c'] : $REQUEST_CERTS);
 
-function vprint( $message, $params ){
+function vprint( $message, $params = array() ){
     global $verbose;
     if( $verbose ) {
         echo vsprintf( "$message", $params );
