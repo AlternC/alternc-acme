@@ -63,6 +63,7 @@ chdir("/usr/share/alternc/panel/");
 require("/usr/share/alternc/panel/class/config_nochk.php");
 
 // we become AlternC admin
+$mem->setid(2000);
 $admin->enabled=1;
 
 // get all vhost-type domaines types:
