@@ -83,11 +83,11 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'system') {
         if( ! $acme->isLocalAlterncDomain( $specialfqdn ) ){
             continue;
         }
-        vprint( _(" hosted locally, running acme..."), array( ));
+        vprint( _(" hosted locally, running acme..."));
 
         $acme->import($specialfqdn);
     }
-    vprint(_("\rFinished renewal for system certificates\n"), array());
+    vprint(_("\rFinished renewal for system certificates\n"));
 }
 else {
     vprint(_("Skipping system certificates, requested certificates type: %s\n"), array($REQUEST_CERTS));
@@ -154,7 +154,7 @@ if ($REQUEST_CERTS == 'all' || $REQUEST_CERTS == 'non-system') {
             if( ! $acme->isLocalAlterncDomain( $sub_domain["sub_domain"]["fqdn"] ) ){
                 continue;
             }
-            vprint( _(" hosted locally, running acme..."), array( ));
+            vprint( _(" hosted locally, running acme..."));
             $acme->import($sub_domain["sub_domain"]["fqdn"]);
         }
         vprint( _("\nFinished acme renewal for non-system certificates"), count( $domainsList ));
@@ -166,4 +166,4 @@ else {
     vprint(_("Skipping non-system certificates, requested certificates type: %s"), array($REQUEST_CERTS));
 }
 
-vprint( _("\nFinished acme renewal\n"), array());
+vprint( _("\nFinished acme renewal\n"));
