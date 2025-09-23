@@ -16,7 +16,7 @@ Depends: apt-utils,
        , certbot
        , python3-certbot-apache | python-certbot-apache
        , ${misc:Depends}
-Conflicts: alternc-certbot
+Conflicts: alternc-certbot, alternc-certificate-provider-letsencrypt
 Replaces: alternc-certificate-provider-letsencrypt (<< 0.0.17~)
 Breaks: alternc-certificate-provider-letsencrypt (<< 0.0.16~)
 Provides: alternc-certificate-provider
@@ -38,4 +38,4 @@ Architecture: all
 Priority: optional
 Section: oldlibs
 Description: transitional package
- This is a transitional package. It can safely be removed.
+ This is a transitional package. It can be safely be removed.
