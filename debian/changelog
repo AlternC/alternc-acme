@@ -1,9 +1,17 @@
+alternc-acme (0.2.0) buster bullseye bookworm; urgency=low
+
+  * Fix : prevent some php error (sprintf, #83 )
+  * During first usage any domain are set , list is empty
+  * Remove old packages naming
+
+ -- Camille Lafitte <alternc@webelys.com>  Thu, 23  Sep 2025 15:20:00 +0200
+
 alternc-acme (0.1.0) buster bullseye bookworm; urgency=low
 
   * Stop suppport before buster
   * Follow AlternC 3.5 support and recent Debian
 
- -- Camille Lafitte <alternc@webelys.com>  Tue, 17 Apri 2025 08:50:00 +0200
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 17 Apr 2025 08:50:00 +0200
 
 alternc-acme (0.0.19) stretch buster; urgency=low
 
